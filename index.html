@@ -407,6 +407,82 @@ footer{padding:48px 56px;background:var(--bg3);border-top:1px solid var(--bd);di
   .igrid{grid-template-columns:1fr 1fr}
   .dkpi{grid-template-columns:repeat(2,1fr)}
 }
+.ncta.whatsapp-cta{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 58px;
+  padding: 16px 28px;
+  border-radius: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.12);
+  background:
+    linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  box-shadow:
+    0 10px 30px rgba(18, 140, 126, 0.30),
+    inset 0 1px 0 rgba(255,255,255,0.18);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    filter 0.22s ease,
+    border-color 0.22s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ncta.whatsapp-cta::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255,255,255,0.14) 35%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+}
+
+.ncta.whatsapp-cta:hover{
+  transform: translateY(-2px) scale(1.01);
+  box-shadow:
+    0 18px 42px rgba(18, 140, 126, 0.38),
+    inset 0 1px 0 rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.22);
+  filter: brightness(1.03);
+}
+
+.ncta.whatsapp-cta:hover::before{
+  transform: translateX(120%);
+}
+
+.ncta.whatsapp-cta:active{
+  transform: translateY(0) scale(0.99);
+}
+
+.ncta.whatsapp-cta:focus-visible{
+  outline: 3px solid rgba(37, 211, 102, 0.35);
+  outline-offset: 4px;
+}
+
+.ncta.whatsapp-cta svg{
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  fill: currentColor;
+}
+
+.ncta.whatsapp-cta span{
+  line-height: 1;
+  white-space: nowrap;
+}
+
 </style>
 </head>
 <body>
@@ -426,7 +502,18 @@ footer{padding:48px 56px;background:var(--bg3);border-top:1px solid var(--bd);di
     <li><a href="#adaptamos">Tu Negocio</a></li>
     <li><a href="#pricing">Planes</a></li>
   </ul>
-  <button class="ncta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Empezá Ahora</button>
+<a
+  class="ncta whatsapp-cta"
+  href="https://wa.me/5493416018944?text=Hola%20PulseDesk%2C%20necesito%20asesoramiento%20para%20mi%20Empresa"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Hablar por WhatsApp con PulseDesk">
+  <svg viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M19.11 17.27c-.29-.15-1.72-.85-1.99-.95-.27-.1-.47-.15-.67.15-.2.29-.77.95-.95 1.14-.17.2-.35.22-.64.08-.29-.15-1.24-.46-2.36-1.46-.87-.77-1.46-1.72-1.63-2.01-.17-.29-.02-.45.13-.59.13-.13.29-.35.44-.52.15-.17.2-.29.29-.49.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.29-1.04 1.02-1.04 2.49 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.21 5.08 4.5.71.31 1.27.49 1.7.63.71.22 1.35.19 1.86.11.57-.08 1.72-.7 1.97-1.38.24-.68.24-1.27.17-1.39-.07-.12-.27-.2-.57-.35Z"/>
+    <path d="M16.03 3.2c-7.07 0-12.8 5.72-12.8 12.78 0 2.26.59 4.46 1.72 6.4L3.2 28.8l6.58-1.72a12.8 12.8 0 0 0 6.25 1.6h.01c7.06 0 12.79-5.72 12.79-12.79 0-3.42-1.33-6.63-3.75-9.05A12.72 12.72 0 0 0 16.03 3.2Zm0 23.33h-.01a10.6 10.6 0 0 1-5.4-1.48l-.39-.23-3.91 1.02 1.04-3.81-.25-.39a10.58 10.58 0 0 1-1.63-5.64c0-5.86 4.77-10.63 10.64-10.63 2.84 0 5.51 1.11 7.52 3.11a10.57 10.57 0 0 1 3.11 7.52c0 5.86-4.77 10.63-10.63 10.63Z"/>
+  </svg>
+  <span>Empezá Ahora</span>
+</a>
 </nav>
 
 <!-- HERO -->
@@ -436,10 +523,10 @@ footer{padding:48px 56px;background:var(--bg3);border-top:1px solid var(--bd);di
       <div class="badge"><span class="bdot"></span>Sistema activo · IA operativa 24/7</div>
       <h1 class="htitle">
         <span class="l1">EL MEJOR</span>
-        <span class="l2 glitch">VENDEDOR.</span>
+        <span class="l2 glitch">CHATBOT.</span>
         <span class="l3">No duerme. No falla. No cobra horas extra.</span>
       </h1>
-      <p class="hsub">PulseDesk automatiza tu negocio con <em>IA que trabaja como una persona real</em>: toma pedidos, carga sistemas, avisa deudas, genera flyers, mueve el dashboard de planta y mucho más.</p>
+      <p class="hsub">PulseDesk automatiza tu negocio con <em>IA que trabaja como una persona real</em>: toma pedidos, carga pedidos/factuas en sistemas, avisa deudas, genera flyers, mueve el dashboard de planta y mucho más.</p>
       <div class="hbtns">
         <button class="btnp" onclick="document.getElementById('demos').scrollIntoView({behavior:'smooth'})">Ver Demos en Vivo</button>
         <button class="btns" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">Cómo funciona</button>
@@ -447,7 +534,7 @@ footer{padding:48px 56px;background:var(--bg3);border-top:1px solid var(--bd);di
       <div class="hstats">
         <div><div class="sn" data-count="98">0</div><div class="sl">% Uptime</div></div>
         <div><div class="sn" data-count="3">0</div><div class="sl">Seg respuesta</div></div>
-        <div><div class="sn" data-count="500">0</div><div class="sl">+ Empresas</div></div>
+        <div><div class="sn" data-count="120">0</div><div class="sl">+ Empresas</div></div>
         <div><div class="sn" data-count="24">0</div><div class="sl">Hs activo</div></div>
       </div>
     </div>
