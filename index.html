@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PulseDesk — IA que trabaja por vos</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c:#00d4ff;--c2:#0099cc;--c3:#005580;--cg:rgba(0,212,255,.3);
+  --w:#eef6ff;--gr:#7a8fa0;--bg:#020810;--bg2:#040d18;--bg3:#071525;
+  --card:#081828;--bd:#0d2a40;--green:#00ff88;--orange:#ff6b35;--red:#ff3355;--yellow:#ffd700;
+  --f1:'Orbitron',monospace;--f2:'Rajdhani',sans-serif;--f3:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--w);font-family:var(--f2);overflow-x:hidden;font-size:16px}
+#bgc{position:fixed;inset:0;z-index:0;pointer-events:none}
+nav,section,footer{position:relative;z-index:2}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 56px;background:rgba(2,8,16,.97);border-bottom:1px solid var(--bd);backdrop-filter:blur(16px)}
+.nlogo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nlogo-icon{width:38px;height:38px;background:linear-gradient(135deg,var(--c),var(--c2));clip-path:polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%);display:flex;align-items:center;justify-content:center;font-size:18px;animation:lglow 3s ease-in-out infinite}
+@keyframes lglow{0%,100%{box-shadow:0 0 10px var(--c)}50%{box-shadow:0 0 28px var(--c),0 0 50px var(--cg)}}
+.nlogo-txt{font-family:var(--f1);font-size:17px;font-weight:900;color:var(--w);letter-spacing:2px}
+.nlogo-txt span{color:var(--c)}
+.nlinks{display:flex;gap:32px;list-style:none}
+.nlinks a{color:var(--gr);text-decoration:none;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;transition:color .25s}
+.nlinks a:hover{color:var(--c)}
+.ncta{background:transparent;border:1px solid var(--c);color:var(--c);padding:9px 24px;font-family:var(--f1);font-size:11px;font-weight:700;letter-spacing:2px;cursor:pointer;text-transform:uppercase;transition:all .3s}
+.ncta:hover{background:var(--c);color:var(--bg);box-shadow:0 0 22px var(--cg)}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;padding:110px 56px 80px}
+.hero-wrap{max-width:1280px;width:100%;margin:0 auto;display:grid;grid-template-columns:1fr 460px;gap:72px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:9px;margin-bottom:26px;border:1px solid var(--c3);background:rgba(0,212,255,.05);padding:7px 16px;font-family:var(--f3);font-size:10px;color:var(--c);letter-spacing:2px;text-transform:uppercase;animation:pb 2.5s ease-in-out infinite}
+@keyframes pb{0%,100%{border-color:var(--c3)}50%{border-color:var(--c);box-shadow:0 0 10px var(--cg)}}
+.bdot{width:6px;height:6px;background:var(--green);border-radius:50%;flex-shrink:0;animation:blink 1.4s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+h1.htitle{font-family:var(--f1);font-size:62px;font-weight:900;line-height:1;letter-spacing:-2px;margin-bottom:20px}
+h1.htitle .l1{color:var(--w);display:block}
+h1.htitle .l2{color:var(--c);display:block;text-shadow:0 0 32px var(--cg)}
+h1.htitle .l3{color:var(--gr);display:block;font-size:.55em;letter-spacing:0;margin-top:6px}
+.hsub{font-size:17px;color:var(--gr);line-height:1.75;margin-bottom:38px;max-width:480px}
+.hsub em{color:var(--c);font-style:normal}
+.hbtns{display:flex;gap:12px;flex-wrap:wrap}
+.btnp{background:linear-gradient(135deg,var(--c),var(--c2));color:var(--bg);padding:14px 36px;border:none;font-family:var(--f1);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%)}
+.btnp:hover{box-shadow:0 0 32px var(--cg),0 0 64px var(--cg)}
+.btns{background:transparent;border:1px solid var(--bd);color:var(--gr);padding:14px 36px;font-family:var(--f1);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%)}
+.btns:hover{border-color:var(--c);color:var(--c)}
+.hstats{display:flex;gap:36px;margin-top:44px;padding-top:36px;border-top:1px solid var(--bd)}
+.sn{font-family:var(--f1);font-size:32px;font-weight:900;color:var(--c)}
+.sl{font-size:11px;color:var(--gr);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+
+/* PHONE */
+.hvisual{position:relative;height:520px;display:flex;align-items:center;justify-content:center}
+.phone{width:260px;height:480px;background:var(--card);border:1px solid var(--bd);border-radius:28px;overflow:hidden;box-shadow:0 0 48px rgba(0,212,255,.1),inset 0 1px 0 rgba(255,255,255,.04);animation:fp 6s ease-in-out infinite}
+@keyframes fp{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+.pbar{height:40px;background:var(--bg3);display:flex;align-items:center;padding:0 14px;gap:6px;border-bottom:1px solid var(--bd)}
+.pd{width:7px;height:7px;border-radius:50%}
+.ptit{font-family:var(--f3);font-size:10px;color:var(--c);margin-left:6px}
+.pchat{padding:12px;display:flex;flex-direction:column;gap:9px;height:calc(100% - 40px);overflow:hidden}
+.pm{padding:9px 12px;font-size:11px;line-height:1.45;max-width:88%;font-family:var(--f2)}
+.pbot{background:rgba(0,212,255,.09);border:1px solid var(--c3);color:var(--w);align-self:flex-start;border-radius:3px 12px 12px 12px}
+.pusr{background:linear-gradient(135deg,#007799,#005580);color:var(--w);align-self:flex-end;border-radius:12px 3px 12px 12px}
+.psys{background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.2);color:var(--green);align-self:center;font-family:var(--f3);font-size:9px;text-align:center;padding:6px 10px;border-radius:6px;width:90%}
+.ptyp{display:flex;gap:3px;padding:9px 12px;background:rgba(0,212,255,.05);border:1px solid var(--bd);border-radius:3px 12px 12px 12px;width:fit-content}
+.ptyp span{width:5px;height:5px;background:var(--c);border-radius:50%;animation:td 1.2s ease-in-out infinite}
+.ptyp span:nth-child(2){animation-delay:.2s}
+.ptyp span:nth-child(3){animation-delay:.4s}
+@keyframes td{0%,80%,100%{transform:scale(.5);opacity:.3}40%{transform:scale(1);opacity:1}}
+.fc{position:absolute;background:var(--card);border:1px solid var(--bd);padding:12px 15px;border-radius:10px;font-family:var(--f3);font-size:10px;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.fc1{top:24px;right:-10px;animation:fc1a 5s ease-in-out infinite}
+.fc2{bottom:44px;left:-10px;animation:fc2a 5.5s ease-in-out infinite}
+@keyframes fc1a{0%,100%{transform:rotate(-2deg) translateY(0)}50%{transform:rotate(-2deg) translateY(-12px)}}
+@keyframes fc2a{0%,100%{transform:rotate(2deg) translateY(0)}50%{transform:rotate(2deg) translateY(-10px)}}
+.fci{font-size:16px;margin-bottom:4px}
+.fcl{color:var(--gr);font-size:9px;text-transform:uppercase;letter-spacing:1px}
+.fcv{font-weight:700;font-size:14px}
+
+/* MARQUEE */
+.mq{background:var(--bg3);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);overflow:hidden;padding:14px 0}
+.mqt{display:flex;gap:52px;white-space:nowrap;animation:mqa 22s linear infinite}
+@keyframes mqa{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mqi{display:flex;align-items:center;gap:9px;font-family:var(--f1);font-size:10px;font-weight:700;color:var(--gr);text-transform:uppercase;letter-spacing:2px}
+.mqi .ico{color:var(--c);font-size:14px}
+
+/* SECTION HEADER */
+.sh{text-align:center;margin-bottom:68px}
+.stag{font-family:var(--f3);font-size:10px;color:var(--c);text-transform:uppercase;letter-spacing:3px;display:block;margin-bottom:12px}
+.stit{font-family:var(--f1);font-size:44px;font-weight:900;line-height:1.1;margin-bottom:16px}
+.ssub{font-size:16px;color:var(--gr);max-width:560px;margin:0 auto;line-height:1.75}
+
+/* FEATURES */
+#features{padding:100px 56px}
+.fg{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:1280px;margin:0 auto;background:var(--bd);border:1px solid var(--bd)}
+.fcard{background:var(--card);padding:44px 34px;position:relative;overflow:hidden;transition:background .35s;cursor:default}
+.fcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--c),transparent);transform:scaleX(0);transition:transform .4s}
+.fcard:hover::before{transform:scaleX(1)}
+.fcard:hover{background:var(--bg3)}
+.ficon{width:50px;height:50px;margin-bottom:22px;background:rgba(0,212,255,.07);border:1px solid var(--c3);display:flex;align-items:center;justify-content:center;font-size:20px;clip-path:polygon(20% 0,80% 0,100% 20%,100% 80%,80% 100%,20% 100%,0 80%,0 20%);transition:all .35s}
+.fcard:hover .ficon{background:rgba(0,212,255,.14);border-color:var(--c);box-shadow:0 0 16px var(--cg)}
+.fnum{position:absolute;top:22px;right:22px;font-family:var(--f3);font-size:10px;color:var(--bd);transition:color .35s}
+.fcard:hover .fnum{color:var(--c3)}
+.ftit{font-family:var(--f1);font-size:13px;font-weight:700;color:var(--w);margin-bottom:10px;letter-spacing:1px}
+.fdesc{color:var(--gr);font-size:13px;line-height:1.7}
+
+/* DASHBOARD */
+#dashboard{padding:100px 56px;background:var(--bg2)}
+.dash-intro{max-width:1280px;margin:0 auto 52px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.dash-intro h2{font-family:var(--f1);font-size:38px;font-weight:900;line-height:1.1;margin-bottom:16px}
+.dash-intro p{color:var(--gr);font-size:15px;line-height:1.8;margin-bottom:18px}
+.dash-intro p strong{color:var(--w)}
+.dib{list-style:none;display:flex;flex-direction:column;gap:10px}
+.dib li{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--gr)}
+.dib li::before{content:'▶';color:var(--c);font-size:9px}
+.dib li strong{color:var(--w)}
+.dinfo-card{background:var(--card);border:1px solid var(--bd);padding:18px 22px;border-radius:6px;display:flex;align-items:center;gap:16px;margin-bottom:10px}
+.dinfo-icon{font-size:28px;flex-shrink:0}
+.dinfo-title{font-family:var(--f1);font-size:11px;font-weight:700;color:var(--w);margin-bottom:4px}
+.dinfo-title.hlt{color:var(--c)}
+.dinfo-desc{color:var(--gr);font-size:13px}
+.sim-btn{background:linear-gradient(135deg,var(--c),var(--c2));border:none;color:var(--bg);padding:12px 24px;font-family:var(--f1);font-size:10px;font-weight:700;letter-spacing:1.5px;cursor:pointer;border-radius:4px;transition:all .3s;width:100%;margin-top:8px}
+.sim-btn:hover{box-shadow:0 0 24px var(--cg)}
+
+/* TV FRAME */
+.tv-wrap{max-width:1280px;margin:0 auto}
+.tv-frame{background:#0a0a0a;border:6px solid #181818;border-radius:10px;box-shadow:0 0 0 2px #0d0d0d,0 0 60px rgba(0,212,255,.12),0 40px 60px rgba(0,0,0,.6);overflow:hidden}
+.tv-label{background:#050505;padding:7px 20px;font-family:var(--f3);font-size:9px;color:var(--c);letter-spacing:3px;border-bottom:1px solid #181818}
+.tv-screen{background:var(--bg)}
+
+/* Dashboard bar */
+.dbar{background:var(--bg3);border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;padding:11px 22px}
+.dbar-title{font-family:var(--f1);font-size:12px;font-weight:700;color:var(--c);letter-spacing:2px;display:flex;align-items:center;gap:10px}
+.live-pill{background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.3);color:var(--green);padding:2px 9px;font-size:9px;font-family:var(--f3);letter-spacing:2px;border-radius:3px;display:flex;align-items:center;gap:5px}
+.ldot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:blink 1s infinite}
+.dbar-meta{display:flex;gap:20px;font-family:var(--f3);font-size:10px;color:var(--gr)}
+.dbar-meta span{color:var(--w)}
+.dbar-clock{font-family:var(--f3);font-size:13px;color:var(--c);font-weight:700}
+
+/* KPI row */
+.dkpi{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:var(--bd);border-bottom:1px solid var(--bd)}
+.kpi{background:var(--bg3);padding:16px 18px;text-align:center}
+.kpi-n{font-family:var(--f1);font-size:26px;font-weight:900;color:var(--c);line-height:1}
+.kpi-l{font-size:10px;color:var(--gr);text-transform:uppercase;letter-spacing:1px;margin-top:4px;font-family:var(--f3)}
+.kpi-d{font-size:9px;margin-top:3px;font-family:var(--f3)}
+.ku{color:var(--green)}.kd{color:var(--red)}.ky{color:var(--yellow)}
+
+/* Main 3 cols */
+.dmain{display:grid;grid-template-columns:1fr 1fr 300px;gap:2px;background:var(--bd)}
+.dcol{background:var(--bg);padding:14px}
+.dcol-hdr{font-family:var(--f1);font-size:9px;font-weight:700;color:var(--gr);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;padding-bottom:9px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
+.dcnt{padding:2px 7px;border-radius:3px;font-size:9px}
+.cnt-new{background:rgba(0,212,255,.1);color:var(--c);border:1px solid rgba(0,212,255,.2)}
+.cnt-prep{background:rgba(255,215,0,.1);color:var(--yellow);border:1px solid rgba(255,215,0,.2)}
+.cnt-ok{background:rgba(0,255,136,.1);color:var(--green);border:1px solid rgba(0,255,136,.2)}
+
+/* Order card */
+.ocard{background:var(--card);border:1px solid var(--bd);border-radius:5px;padding:11px 13px;margin-bottom:7px;position:relative;overflow:hidden;transition:border-color .3s}
+.ocard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+.ocard.new-o::before{background:var(--c)}
+.ocard.prep-o::before{background:var(--yellow)}
+.ocard.ready-o::before{background:var(--green)}
+.ocard.new-o{border-color:rgba(0,212,255,.15)}
+.ocard.prep-o{border-color:rgba(255,215,0,.15)}
+.ocard.ready-o{border-color:rgba(0,255,136,.15)}
+.ocard.incoming{animation:ocIn .5s ease-out forwards}
+@keyframes ocIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.oc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.oc-id{font-family:var(--f3);font-size:10px;color:var(--c);font-weight:700}
+.oc-st{font-family:var(--f3);font-size:9px;padding:2px 7px;border-radius:3px;font-weight:700}
+.st-new{background:rgba(0,212,255,.1);color:var(--c);border:1px solid rgba(0,212,255,.2)}
+.st-prep{background:rgba(255,215,0,.1);color:var(--yellow);border:1px solid rgba(255,215,0,.2)}
+.st-ready{background:rgba(0,255,136,.1);color:var(--green);border:1px solid rgba(0,255,136,.2)}
+.oc-client{font-size:13px;font-weight:700;color:var(--w);margin-bottom:3px}
+.oc-items{font-size:12px;color:var(--gr);margin-bottom:5px}
+.oc-foot{display:flex;align-items:center;justify-content:space-between}
+.oc-price{font-family:var(--f3);font-size:11px;color:var(--green);font-weight:700}
+.oc-ch{font-size:10px;color:var(--gr)}
+.oc-time{font-family:var(--f3);font-size:9px;color:var(--gr)}
+.oc-bar{height:3px;background:var(--bd);border-radius:2px;margin-top:7px;overflow:hidden}
+.oc-fill{height:100%;border-radius:2px}
+.fill-new{background:var(--c);width:12%}
+.fill-prep{background:var(--yellow);width:55%;animation:fillAnim 2.5s ease-in-out infinite alternate}
+@keyframes fillAnim{from{width:40%}to{width:78%}}
+.fill-ready{background:var(--green);width:100%}
+
+/* Alert list */
+.alist{display:flex;flex-direction:column;gap:7px}
+.aitem{display:flex;gap:9px;align-items:flex-start;padding:9px;background:var(--card);border:1px solid var(--bd);border-radius:5px;font-size:11px}
+.aitem.a-in{animation:ocIn .4s ease-out}
+.aico{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.aig{background:rgba(0,255,136,.1)}.aib{background:rgba(0,212,255,.1)}.aio{background:rgba(255,107,53,.1)}.air{background:rgba(255,51,85,.1)}
+.atxt{flex:1}
+.atit{font-weight:700;color:var(--w);font-size:11px;margin-bottom:2px}
+.abod{color:var(--gr);font-size:10px;line-height:1.4}
+.atime{font-family:var(--f3);font-size:9px;color:var(--c3);flex-shrink:0}
+
+/* Ticker */
+.dticker{background:var(--bg3);border-top:1px solid var(--bd);padding:7px 22px;display:flex;align-items:center;gap:28px;font-family:var(--f3);font-size:9px;color:var(--gr)}
+.tlive{display:flex;align-items:center;gap:5px;color:var(--green);flex-shrink:0}
+.tscroll{flex:1;overflow:hidden;white-space:nowrap}
+.tscroll-inner{animation:ticker 20s linear infinite;display:inline-block}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ADAPTAMOS */
+#adaptamos{padding:100px 56px}
+.igrid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--bd);border:1px solid var(--bd);max-width:1280px;margin:0 auto}
+.igrid.mb{margin-bottom:2px}
+.icard{background:var(--card);padding:28px 20px;text-align:center;cursor:default;transition:background .3s}
+.icard:hover{background:var(--bg3)}
+.iem{font-size:32px;margin-bottom:10px;display:block;transition:transform .3s}
+.icard:hover .iem{transform:scale(1.2)}
+.itit{font-family:var(--f1);font-size:11px;font-weight:700;color:var(--w);letter-spacing:1px;margin-bottom:6px}
+.icard.hl .itit{color:var(--c)}
+.idesc{font-size:12px;color:var(--gr);line-height:1.5}
+.promise{background:var(--card);border:1px solid var(--bd);padding:50px;position:relative;overflow:hidden;max-width:1280px;margin:48px auto 0}
+.promise::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(0,212,255,.05) 0,transparent 70%);pointer-events:none}
+.pgrid{display:grid;grid-template-columns:1fr 260px;gap:50px;align-items:center;position:relative}
+.promise h3{font-family:var(--f1);font-size:34px;font-weight:900;line-height:1.1;margin-bottom:14px}
+.promise p{color:var(--gr);font-size:15px;line-height:1.8;max-width:560px}
+.promise p strong{color:var(--w)}
+.prow{display:flex;gap:28px;margin-top:28px;padding-top:28px;border-top:1px solid var(--bd)}
+.psn{font-family:var(--f1);font-size:24px;font-weight:900;color:var(--c)}
+.psl{font-size:11px;color:var(--gr);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+.clist{display:flex;flex-direction:column;gap:8px}
+.cli{background:var(--bg3);border:1px solid var(--bd);padding:11px 15px;border-radius:4px;display:flex;align-items:center;gap:9px;font-size:13px;color:var(--w)}
+.cli.chl{background:rgba(0,212,255,.06);border-color:var(--c3)}
+
+/* DEMOS */
+#demos{padding:100px 56px;background:var(--bg2)}
+.dtabs{display:flex;max-width:1280px;margin:0 auto 46px;border:1px solid var(--bd);overflow:hidden}
+.dtab{flex:1;padding:13px 14px;background:transparent;border:none;color:var(--gr);cursor:pointer;font-family:var(--f1);font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;transition:all .3s;border-right:1px solid var(--bd);position:relative}
+.dtab:last-child{border-right:none}
+.dtab::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--c);transform:scaleX(0);transition:transform .3s}
+.dtab.on{background:rgba(0,212,255,.07);color:var(--c)}
+.dtab.on::after{transform:scaleX(1)}
+.dtab:hover:not(.on){background:rgba(0,212,255,.03);color:var(--w)}
+.dpanel{display:none;max-width:1280px;margin:0 auto}
+.dpanel.on{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+.dd h3{font-family:var(--f1);font-size:26px;font-weight:900;margin-bottom:12px}
+.dd p{color:var(--gr);font-size:15px;line-height:1.8;margin-bottom:18px}
+.dbl{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:22px}
+.dbl li{display:flex;align-items:center;gap:11px;font-size:14px;color:var(--gr)}
+.dbl li::before{content:'▶';color:var(--c);font-size:9px}
+.dbl li strong{color:var(--w)}
+.dui{background:var(--card);border:1px solid var(--bd);border-radius:10px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.4)}
+.duih{background:var(--bg3);padding:11px 17px;display:flex;align-items:center;gap:7px;border-bottom:1px solid var(--bd)}
+.duih-d{width:9px;height:9px;border-radius:50%}
+.duih-t{font-family:var(--f3);font-size:10px;color:var(--c);margin-left:5px}
+
+/* Chat demo */
+.cbody{padding:14px;height:320px;overflow-y:auto;display:flex;flex-direction:column;gap:9px}
+.cbody::-webkit-scrollbar{width:3px}
+.cbody::-webkit-scrollbar-thumb{background:var(--c3)}
+.cm{max-width:88%;padding:9px 12px;font-size:13px;line-height:1.5;font-family:var(--f2)}
+.cmb{background:rgba(0,212,255,.08);border:1px solid var(--c3);color:var(--w);align-self:flex-start;border-radius:3px 11px 11px 11px}
+.cmu{background:linear-gradient(135deg,#007799,#005580);color:var(--w);align-self:flex-end;border-radius:11px 3px 11px 11px}
+.cms{background:rgba(0,255,136,.07);border:1px solid rgba(0,255,136,.2);color:var(--green);align-self:center;font-family:var(--f3);font-size:10px;text-align:center;padding:5px 11px;border-radius:5px}
+.cinp{padding:10px;border-top:1px solid var(--bd);display:flex;gap:7px}
+.ci{flex:1;background:var(--bg3);border:1px solid var(--bd);color:var(--w);padding:8px 13px;font-family:var(--f2);font-size:13px;border-radius:5px;outline:none;transition:border-color .3s}
+.ci:focus{border-color:var(--c)}
+.csend{background:var(--c);border:none;color:var(--bg);padding:8px 15px;border-radius:5px;cursor:pointer;font-family:var(--f1);font-size:10px;font-weight:700;transition:all .3s}
+.csend:hover{box-shadow:0 0 14px var(--cg)}
+
+/* Flyer demo */
+.fbody{padding:18px}
+.fctrl{display:flex;flex-direction:column;gap:9px;margin-bottom:14px}
+.finp{background:var(--bg3);border:1px solid var(--bd);color:var(--w);padding:8px 12px;font-family:var(--f2);font-size:13px;border-radius:5px;outline:none;transition:border-color .3s}
+.finp:focus{border-color:var(--c)}
+.fgbtn{background:linear-gradient(135deg,var(--c),var(--c2));border:none;color:var(--bg);padding:10px 18px;font-family:var(--f1);font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;border-radius:5px;transition:all .3s}
+.fgbtn:hover{box-shadow:0 0 22px var(--cg)}
+.fprev{background:linear-gradient(135deg,#001122,#002244);border:1px solid var(--c3);border-radius:9px;padding:22px;text-align:center;min-height:170px;transition:all .5s}
+.fpt{font-family:var(--f1);font-size:16px;font-weight:900;color:var(--c);margin-bottom:5px;text-transform:uppercase}
+.fpp{font-family:var(--f1);font-size:34px;font-weight:900;color:var(--w);text-shadow:0 0 14px var(--cg)}
+.fpb{display:inline-block;background:var(--orange);color:#fff;padding:3px 11px;font-size:11px;font-weight:700;border-radius:20px;margin-top:7px}
+.fpf{margin-top:10px;color:var(--gr);font-size:12px}
+
+/* Stock demo */
+.stbody{padding:0}
+.sttbl{width:100%;border-collapse:collapse}
+.sttbl th{font-family:var(--f3);font-size:9px;color:var(--gr);text-transform:uppercase;letter-spacing:1px;padding:9px 13px;text-align:left;border-bottom:1px solid var(--bd)}
+.sttbl td{padding:11px 13px;font-size:13px;border-bottom:1px solid rgba(255,255,255,.03)}
+.sttbl tr:hover td{background:rgba(0,212,255,.03)}
+.snm{color:var(--w);font-weight:600}
+.spr{color:var(--w);font-family:var(--f3)}
+.sqt{color:var(--gr);font-family:var(--f3)}
+.sst{padding:3px 7px;border-radius:3px;font-size:9px;font-weight:700;font-family:var(--f3)}
+.sok{background:rgba(0,255,136,.1);color:var(--green);border:1px solid rgba(0,255,136,.2)}
+.slow{background:rgba(255,107,53,.1);color:var(--orange);border:1px solid rgba(255,107,53,.2)}
+.sout{background:rgba(255,51,85,.1);color:var(--red);border:1px solid rgba(255,51,85,.2)}
+.st-ft{display:flex;align-items:center;gap:6px;padding:10px 13px;background:rgba(0,212,255,.04);border-top:1px solid var(--bd);font-family:var(--f3);font-size:9px;color:var(--gr)}
+
+/* Notif demo */
+.nbody{padding:14px;display:flex;flex-direction:column;gap:8px}
+.ncard{background:var(--bg3);border:1px solid var(--bd);border-radius:7px;padding:12px;display:flex;gap:11px;align-items:flex-start;transition:all .3s}
+.ncard:hover{border-color:var(--c3);transform:translateX(3px)}
+.ncard.n-in{animation:ocIn .45s ease-out}
+.ni{width:34px;height:34px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.nig{background:rgba(0,255,136,.1)}.nib{background:rgba(0,212,255,.1)}.nio{background:rgba(255,107,53,.1)}.nir{background:rgba(255,51,85,.1)}
+.ntxt{flex:1}
+.ntit{font-weight:700;color:var(--w);font-size:13px;margin-bottom:3px}
+.nbod{color:var(--gr);font-size:12px;line-height:1.4}
+.ntime{font-family:var(--f3);font-size:9px;color:var(--c3)}
+.nsimb{background:linear-gradient(135deg,var(--c),var(--c2));border:none;color:var(--bg);padding:10px 18px;font-family:var(--f1);font-size:10px;font-weight:700;cursor:pointer;border-radius:5px;transition:all .3s;margin:0 14px 14px}
+.nsimb:hover{box-shadow:0 0 18px var(--cg)}
+
+/* HOW */
+#how{padding:100px 56px}
+.hw2{max-width:1100px;margin:0 auto;position:relative}
+.hline{position:absolute;left:50%;top:50px;bottom:50px;width:1px;background:linear-gradient(180deg,transparent,var(--c),transparent);transform:translateX(-50%)}
+.steps{display:flex;flex-direction:column;gap:68px}
+.step{display:grid;grid-template-columns:1fr 68px 1fr;align-items:center}
+.sc{background:var(--card);border:1px solid var(--bd);padding:34px;transition:all .3s;cursor:default}
+.sc:hover{border-color:var(--c);box-shadow:0 0 22px rgba(0,212,255,.08)}
+.snum{font-family:var(--f3);font-size:10px;color:var(--c);margin-bottom:9px;letter-spacing:2px}
+.stit2{font-family:var(--f1);font-size:17px;font-weight:700;color:var(--w);margin-bottom:9px}
+.sdesc{color:var(--gr);font-size:14px;line-height:1.7}
+.sctr{display:flex;align-items:center;justify-content:center}
+.sdot{width:42px;height:42px;background:var(--bg);border:2px solid var(--c);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--f1);font-size:12px;font-weight:700;color:var(--c);box-shadow:0 0 16px var(--cg);z-index:1;position:relative}
+.step:nth-child(even) .sc{grid-column:3;grid-row:1}
+.step:nth-child(even) .sctr{grid-column:2;grid-row:1}
+.step:nth-child(even) .sv{grid-column:1;grid-row:1}
+
+/* PRICING */
+#pricing{padding:100px 56px;background:var(--bg2)}
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:1100px;margin:0 auto;background:var(--bd);border:1px solid var(--bd)}
+.pcard{background:var(--card);padding:50px 34px;position:relative;overflow:hidden}
+.pcard.feat{background:linear-gradient(180deg,rgba(0,212,255,.07) 0,var(--card) 100%)}
+.pcard.feat::before{content:'MÁS POPULAR';position:absolute;top:0;left:0;right:0;background:var(--c);color:var(--bg);padding:5px;text-align:center;font-family:var(--f3);font-size:9px;font-weight:700;letter-spacing:3px}
+.pname{font-family:var(--f1);font-size:11px;font-weight:700;color:var(--gr);letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;margin-top:14px}
+.pcard.feat .pname{margin-top:26px}
+.pamt{font-family:var(--f1);font-size:46px;font-weight:900;color:var(--w);line-height:1;margin-bottom:4px}
+.pamt sub{font-size:20px;color:var(--gr);vertical-align:super}
+.pper{font-size:13px;color:var(--gr);margin-bottom:32px}
+.pfl{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:32px}
+.pfl li{display:flex;gap:9px;font-size:14px;color:var(--gr)}
+.pfl li.yes{color:var(--w)}
+.pfl .ck{color:var(--c);font-size:10px;width:13px;flex-shrink:0}
+.pfl .no{color:var(--bd);font-size:10px;width:13px;flex-shrink:0}
+.pbtn{width:100%;padding:12px;font-family:var(--f1);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s;border-radius:3px}
+.pbg{background:transparent;border:1px solid var(--bd);color:var(--gr)}
+.pbg:hover{border-color:var(--c);color:var(--c)}
+.pbs{background:linear-gradient(135deg,var(--c),var(--c2));border:none;color:var(--bg)}
+.pbs:hover{box-shadow:0 0 22px var(--cg)}
+
+/* CTA */
+#cta{padding:130px 56px;position:relative;overflow:hidden}
+.cta-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(0,212,255,.06) 0,transparent 70%);pointer-events:none}
+.cta-wrap{text-align:center;position:relative;max-width:740px;margin:0 auto}
+.cta-t{font-family:var(--f1);font-size:52px;font-weight:900;line-height:1;margin-bottom:18px}
+.cta-s{font-size:17px;color:var(--gr);margin-bottom:38px;line-height:1.75}
+.cta-form{display:flex;max-width:420px;margin:0 auto}
+.cemail{flex:1;background:var(--card);border:1px solid var(--bd);border-right:none;color:var(--w);padding:13px 19px;font-family:var(--f2);font-size:15px;outline:none;transition:border-color .3s}
+.cemail:focus{border-color:var(--c)}
+.csub{background:var(--c);border:none;color:var(--bg);padding:13px 26px;font-family:var(--f1);font-size:11px;font-weight:700;letter-spacing:2px;cursor:pointer;text-transform:uppercase;transition:all .3s}
+.csub:hover{box-shadow:0 0 26px var(--cg)}
+.cta-note{margin-top:12px;font-family:var(--f3);font-size:10px;color:var(--gr)}
+
+/* FOOTER */
+footer{padding:48px 56px;background:var(--bg3);border-top:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:22px}
+.flogo{font-family:var(--f1);font-size:17px;font-weight:900}
+.flogo span{color:var(--c)}
+.flinks{display:flex;gap:22px}
+.flinks a{color:var(--gr);text-decoration:none;font-size:13px;transition:color .3s}
+.flinks a:hover{color:var(--c)}
+.fcopy{color:var(--gr);font-size:12px;font-family:var(--f3)}
+
+/* REVEAL */
+.rev{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.rev.vis{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* GLITCH */
+.glitch{animation:glitch 9s infinite}
+@keyframes glitch{0%,94%,100%{text-shadow:none}95%{text-shadow:-3px 0 var(--red),3px 0 var(--c)}96%{text-shadow:3px 0 var(--red),-3px 0 var(--c)}97%{text-shadow:none}98%{text-shadow:-2px 0 var(--green),2px 0 var(--red)}}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  nav{padding:14px 24px}
+  .nlinks{display:none}
+  #hero{padding:90px 24px 60px}
+  .hero-wrap{grid-template-columns:1fr;gap:40px}
+  .hvisual{display:none}
+  h1.htitle{font-size:46px}
+  #features,#adaptamos,#demos,#how,#pricing,#cta,#dashboard{padding:72px 24px}
+  .fg,.dmain,.dash-intro,.pgrid{grid-template-columns:1fr}
+  .dkpi{grid-template-columns:repeat(3,1fr)}
+  .igrid{grid-template-columns:repeat(2,1fr)}
+  .dpanel.on{grid-template-columns:1fr}
+  .hline{display:none}
+  .step{grid-template-columns:1fr}
+  .sc,.step:nth-child(even) .sc{grid-column:1}
+  .sctr,.step:nth-child(even) .sctr,.sv,.step:nth-child(even) .sv{display:none}
+  .pg{grid-template-columns:1fr}
+  .dtabs{flex-wrap:wrap}
+  .dtab{flex:none;width:50%}
+  footer{flex-direction:column;text-align:center}
+  .flinks{flex-wrap:wrap;justify-content:center}
+}
+@media(max-width:600px){
+  h1.htitle{font-size:36px}
+  .stit{font-size:30px}
+  .cta-t{font-size:34px}
+  .fg{grid-template-columns:1fr}
+  .igrid{grid-template-columns:1fr 1fr}
+  .dkpi{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<canvas id="bgc"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nlogo">
+    <div class="nlogo-icon">⚡</div>
+    <span class="nlogo-txt">PULSE<span>DESK</span></span>
+  </a>
+  <ul class="nlinks">
+    <li><a href="#features">Funciones</a></li>
+    <li><a href="#dashboard">Dashboard</a></li>
+    <li><a href="#demos">Demos</a></li>
+    <li><a href="#adaptamos">Tu Negocio</a></li>
+    <li><a href="#pricing">Planes</a></li>
+  </ul>
+  <button class="ncta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Empezá Ahora</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-wrap">
+    <div>
+      <div class="badge"><span class="bdot"></span>Sistema activo · IA operativa 24/7</div>
+      <h1 class="htitle">
+        <span class="l1">EL MEJOR</span>
+        <span class="l2 glitch">VENDEDOR.</span>
+        <span class="l3">No duerme. No falla. No cobra horas extra.</span>
+      </h1>
+      <p class="hsub">PulseDesk automatiza tu negocio con <em>IA que trabaja como una persona real</em>: toma pedidos, carga sistemas, avisa deudas, genera flyers, mueve el dashboard de planta y mucho más.</p>
+      <div class="hbtns">
+        <button class="btnp" onclick="document.getElementById('demos').scrollIntoView({behavior:'smooth'})">Ver Demos en Vivo</button>
+        <button class="btns" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">Cómo funciona</button>
+      </div>
+      <div class="hstats">
+        <div><div class="sn" data-count="98">0</div><div class="sl">% Uptime</div></div>
+        <div><div class="sn" data-count="3">0</div><div class="sl">Seg respuesta</div></div>
+        <div><div class="sn" data-count="500">0</div><div class="sl">+ Empresas</div></div>
+        <div><div class="sn" data-count="24">0</div><div class="sl">Hs activo</div></div>
+      </div>
+    </div>
+    <div class="hvisual">
+      <div class="fc fc1">
+        <div class="fci">📦</div>
+        <div class="fcl">Nuevo Pedido</div>
+        <div class="fcv" style="color:var(--green)">+$84.500</div>
+      </div>
+      <div class="phone">
+        <div class="pbar">
+          <div class="pd" style="background:#ff3355"></div>
+          <div class="pd" style="background:#ff6b35"></div>
+          <div class="pd" style="background:#00ff88"></div>
+          <span class="ptit">⚡ PulseDesk Bot</span>
+        </div>
+        <div class="pchat" id="heroChat">
+          <div class="pm pbot">Hola! 👋 Soy el asistente de <strong>TechStore</strong>. ¿Qué necesitás?</div>
+          <div class="pm pusr">Quiero pedir 3 teclados inalámbricos</div>
+          <div class="pm pbot">Logitech K380 a $18.500 c/u. Stock: 12 ✅</div>
+          <div class="pm pusr">Dale, los quiero</div>
+          <div class="ptyp"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+      <div class="fc fc2">
+        <div class="fci">📺</div>
+        <div class="fcl">Dashboard Planta</div>
+        <div class="fcv" style="color:var(--c);font-size:11px">Pedido cayó al TV</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq">
+  <div class="mqt">
+    <div class="mqi"><span class="ico">🤖</span>Chatbots Inteligentes</div>
+    <div class="mqi"><span class="ico">📦</span>Gestión de Pedidos</div>
+    <div class="mqi"><span class="ico">📺</span>Dashboard en Planta</div>
+    <div class="mqi"><span class="ico">💳</span>Cobros Automáticos</div>
+    <div class="mqi"><span class="ico">📊</span>Control de Stock</div>
+    <div class="mqi"><span class="ico">🎨</span>Flyers de Ventas</div>
+    <div class="mqi"><span class="ico">🔔</span>Alertas a Vendedores</div>
+    <div class="mqi"><span class="ico">💰</span>Gestión de Deudas</div>
+    <div class="mqi"><span class="ico">⚡</span>Respuesta en Segundos</div>
+    <div class="mqi"><span class="ico">🤖</span>Chatbots Inteligentes</div>
+    <div class="mqi"><span class="ico">📦</span>Gestión de Pedidos</div>
+    <div class="mqi"><span class="ico">📺</span>Dashboard en Planta</div>
+    <div class="mqi"><span class="ico">💳</span>Cobros Automáticos</div>
+    <div class="mqi"><span class="ico">📊</span>Control de Stock</div>
+    <div class="mqi"><span class="ico">🎨</span>Flyers de Ventas</div>
+    <div class="mqi"><span class="ico">🔔</span>Alertas a Vendedores</div>
+    <div class="mqi"><span class="ico">💰</span>Gestión de Deudas</div>
+    <div class="mqi"><span class="ico">⚡</span>Respuesta en Segundos</div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="sh rev">
+    <span class="stag">// capacidades</span>
+    <h2 class="stit">Una IA que hace<br><span style="color:var(--c)">el trabajo de 5 personas</span></h2>
+    <p class="ssub">Todo lo que necesita tu negocio, automatizado, conectado y funcionando 24 horas al día.</p>
+  </div>
+  <div class="fg">
+    <div class="fcard rev"><span class="fnum">01</span><div class="ficon">🤖</div><div class="ftit">Chatbot con Pedidos</div><p class="fdesc">Tu asistente recibe pedidos por WhatsApp, Instagram o web, los valida con tu stock real y los carga automáticamente al sistema.</p></div>
+    <div class="fcard rev d1"><span class="fnum">02</span><div class="ficon">📊</div><div class="ftit">Stock y Precios en Vivo</div><p class="fdesc">Consulta de disponibilidad y precios en tiempo real. El bot responde con datos actualizados sin intervención humana.</p></div>
+    <div class="fcard rev d2"><span class="fnum">03</span><div class="ficon">💰</div><div class="ftit">Gestión de Deudas</div><p class="fdesc">Envía recordatorios de pagos automáticos con saldo detallado, fecha de vencimiento y link de pago. Sin vergüenza, sin demoras.</p></div>
+    <div class="fcard rev"><span class="fnum">04</span><div class="ficon">🎨</div><div class="ftit">Generador de Flyers</div><p class="fdesc">Crea flyers de ofertas y promociones con IA. Solo decile el producto y el precio, el sistema genera la imagen lista para compartir.</p></div>
+    <div class="fcard rev d1"><span class="fnum">05</span><div class="ficon">🔔</div><div class="ftit">Alertas a Vendedores</div><p class="fdesc">El sistema notifica automáticamente a tu equipo cuando entra un pedido, cuando un cliente no compra o cuando el stock es bajo.</p></div>
+    <div class="fcard rev d2"><span class="fnum">06</span><div class="ficon">📺</div><div class="ftit">Dashboard en Planta</div><p class="fdesc">TV conectado en tiempo real. Cada pedido aparece al instante en producción, eliminando errores y acelerando la preparación.</p></div>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section id="dashboard">
+  <div class="sh rev">
+    <span class="stag">// flujo de producción en tiempo real</span>
+    <h2 class="stit">Dashboard de Pedidos<br><span style="color:var(--c)">en tu planta · en vivo</span></h2>
+    <p class="ssub">Montá un TV en tu depósito o fábrica. Cada pedido que cae al bot aparece al instante en pantalla, listo para ser preparado sin intermediarios.</p>
+  </div>
+
+  <div class="dash-intro rev">
+    <div>
+      <h2>Cero papeles.<br><span style="color:var(--c)">Cero confusiones.</span></h2>
+      <p style="margin-top:14px">Antes, alguien anotaba el pedido, lo mandaba por WhatsApp al depósito y rezaba que no se pierda. <strong>Con PulseDesk, el pedido llega en tiempo real al TV de producción, con todo el detalle, en menos de 2 segundos.</strong></p>
+      <ul class="dib" style="margin-top:16px">
+        <li><strong>El bot recibe el pedido del cliente</strong></li>
+        <li><strong>Se muestra al instante en el dashboard de planta</strong></li>
+        <li><strong>El equipo lo prepara sin intermediarios</strong></li>
+        <li><strong>El vendedor recibe confirmación cuando está listo</strong></li>
+        <li><strong>El cliente recibe aviso de despacho automático</strong></li>
+      </ul>
+    </div>
+    <div>
+      <div class="dinfo-card">
+        <div class="dinfo-icon">📺</div>
+        <div>
+          <div class="dinfo-title">TV en depósito o fábrica</div>
+          <div class="dinfo-desc">Conectado al sistema vía WiFi o cable. Se actualiza solo, sin intervención.</div>
+        </div>
+      </div>
+      <div class="dinfo-card">
+        <div class="dinfo-icon">⚡</div>
+        <div>
+          <div class="dinfo-title hlt">Latencia menor a 2 segundos</div>
+          <div class="dinfo-desc">El pedido entra por WhatsApp y en menos de 2 seg ya está en pantalla.</div>
+        </div>
+      </div>
+      <div class="dinfo-card">
+        <div class="dinfo-icon">🔄</div>
+        <div>
+          <div class="dinfo-title">Estados en tiempo real</div>
+          <div class="dinfo-desc">Nuevo → En preparación → Listo → Despachado. Todo visible.</div>
+        </div>
+      </div>
+      <button class="sim-btn" id="simBtn" onclick="simOrder()">⚡ SIMULAR NUEVO PEDIDO EN VIVO</button>
+    </div>
+  </div>
+
+  <!-- TV FRAME -->
+  <div class="tv-wrap rev">
+    <div class="tv-frame">
+      <div class="tv-label">● PULSEDESK LIVE &nbsp;&nbsp; ◉ &nbsp;&nbsp; PANEL DE PRODUCCIÓN — ACTUALIZACIÓN EN TIEMPO REAL</div>
+      <div class="tv-screen">
+        <div class="dbar">
+          <div class="dbar-title">⚡ PULSEDESK DASHBOARD <div class="live-pill"><span class="ldot"></span>EN VIVO</div></div>
+          <div class="dbar-meta">Turno: <span>Mañana</span> &nbsp;|&nbsp; Operario: <span>Carlos R.</span> &nbsp;|&nbsp; Línea: <span>A-1</span></div>
+          <div class="dbar-clock" id="dashClock">00:00:00</div>
+        </div>
+        <div class="dkpi">
+          <div class="kpi"><div class="kpi-n" id="kN">3</div><div class="kpi-l">Pedidos Nuevos</div><div class="kpi-d ku">▲ Últimos 30min</div></div>
+          <div class="kpi"><div class="kpi-n" id="kP">2</div><div class="kpi-l">En Preparación</div><div class="kpi-d ky">● Activos</div></div>
+          <div class="kpi"><div class="kpi-n" id="kL">5</div><div class="kpi-l">Listos Hoy</div><div class="kpi-d ku">▲ +2 vs ayer</div></div>
+          <div class="kpi"><div class="kpi-n" id="kT">$1.284.000</div><div class="kpi-l">Total del Día</div><div class="kpi-d ku">▲ +18%</div></div>
+          <div class="kpi"><div class="kpi-n" id="kTm">4m</div><div class="kpi-l">Tiempo Promedio</div><div class="kpi-d ku">▼ Mejorado</div></div>
+        </div>
+        <div class="dmain">
+          <div class="dcol">
+            <div class="dcol-hdr">🆕 PEDIDOS NUEVOS <span class="dcnt cnt-new" id="cntNew">3</span></div>
+            <div id="colNew">
+              <div class="ocard new-o">
+                <div class="oc-top"><span class="oc-id">#PD-1048</span><span class="oc-st st-new">NUEVO</span></div>
+                <div class="oc-client">Lucas García</div>
+                <div class="oc-items">3x Auriculares BT Pro · 1x Cable USB-C</div>
+                <div class="oc-foot"><span class="oc-price">$87.500</span><span class="oc-ch">📱 WhatsApp</span><span class="oc-time">hace 1m</span></div>
+                <div class="oc-bar"><div class="oc-fill fill-new"></div></div>
+              </div>
+              <div class="ocard new-o">
+                <div class="oc-top"><span class="oc-id">#PD-1047</span><span class="oc-st st-new">NUEVO</span></div>
+                <div class="oc-client">Florencia Méndez</div>
+                <div class="oc-items">2x Teclado K380 · 1x Mouse Inalámbrico</div>
+                <div class="oc-foot"><span class="oc-price">$54.000</span><span class="oc-ch">💬 Instagram</span><span class="oc-time">hace 4m</span></div>
+                <div class="oc-bar"><div class="oc-fill fill-new"></div></div>
+              </div>
+              <div class="ocard new-o">
+                <div class="oc-top"><span class="oc-id">#PD-1046</span><span class="oc-st st-new">NUEVO</span></div>
+                <div class="oc-client">Roberto Díaz</div>
+                <div class="oc-items">1x Monitor 27" 4K</div>
+                <div class="oc-foot"><span class="oc-price">$245.000</span><span class="oc-ch">🌐 Web</span><span class="oc-time">hace 7m</span></div>
+                <div class="oc-bar"><div class="oc-fill fill-new"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="dcol">
+            <div class="dcol-hdr">🔧 EN PREPARACIÓN <span class="dcnt cnt-prep" id="cntPrep">2</span></div>
+            <div id="colPrep">
+              <div class="ocard prep-o">
+                <div class="oc-top"><span class="oc-id">#PD-1045</span><span class="oc-st st-prep">PREPARANDO</span></div>
+                <div class="oc-client">María Rodríguez</div>
+                <div class="oc-items">1x iPhone 15 Pro 128GB · 1x Funda MagSafe</div>
+                <div class="oc-foot"><span class="oc-price">$1.312.000</span><span class="oc-ch">📱 WhatsApp</span><span class="oc-time">hace 9m</span></div>
+                <div class="oc-bar"><div class="oc-fill fill-prep"></div></div>
+              </div>
+              <div class="ocard prep-o">
+                <div class="oc-top"><span class="oc-id">#PD-1044</span><span class="oc-st st-prep">PREPARANDO</span></div>
+                <div class="oc-client">Agustín Torres</div>
+                <div class="oc-items">5x Pen Drive 64GB · 2x Hub USB</div>
+                <div class="oc-foot"><span class="oc-price">$38.500</span><span class="oc-ch">🌐 Web</span><span class="oc-time">hace 14m</span></div>
+                <div class="oc-bar"><div class="oc-fill fill-prep"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="dcol" style="background:var(--bg3)">
+            <div class="dcol-hdr">🔔 ALERTAS <span class="dcnt cnt-ok">Live</span></div>
+            <div class="alist" id="colAlerts">
+              <div class="aitem"><div class="aico aig">✅</div><div class="atxt"><div class="atit">Pedido #PD-1043 listo</div><div class="abod">AirPods Pro — Esperando despacho.</div></div><div class="atime">hace 2m</div></div>
+              <div class="aitem"><div class="aico aio">⚠️</div><div class="atxt"><div class="atit">Stock bajo: Samsung S24</div><div class="abod">Solo 3 unidades. Compras notificado.</div></div><div class="atime">hace 8m</div></div>
+              <div class="aitem"><div class="aico aib">📦</div><div class="atxt"><div class="atit">5 pedidos completados hoy</div><div class="abod">Total: $1.284.000. Récord del turno.</div></div><div class="atime">hace 11m</div></div>
+              <div class="aitem"><div class="aico air">💰</div><div class="atxt"><div class="atit">Deuda vencida — P. Suárez</div><div class="abod">$47.200 — Recordatorio enviado.</div></div><div class="atime">hace 22m</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="dticker">
+          <span class="tlive"><span class="ldot"></span>LIVE</span>
+          <div class="tscroll"><span class="tscroll-inner">⚡ PulseDesk Dashboard — Tiempo real &nbsp;|&nbsp; 📦 Pedido #1043 despachado hace 2min &nbsp;|&nbsp; ✅ Stock actualizado automáticamente &nbsp;|&nbsp; 🔔 Vendedor Carlos recibió 3 alertas hoy &nbsp;|&nbsp; 💰 Cobro pendiente: M. González $38.000 &nbsp;|&nbsp; 📊 Rendimiento: +18% vs promedio &nbsp;|&nbsp; ⚡ PulseDesk Dashboard — Tiempo real &nbsp;|&nbsp; 📦 Pedido #1043 despachado hace 2min &nbsp;|&nbsp; ✅ Stock actualizado automáticamente &nbsp;|&nbsp; 🔔 Vendedor Carlos recibió 3 alertas hoy &nbsp;|&nbsp; 💰 Cobro pendiente: M. González $38.000 &nbsp;|&nbsp;</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADAPTAMOS -->
+<section id="adaptamos">
+  <div class="sh rev">
+    <span class="stag">// compatibilidad total</span>
+    <h2 class="stit">Nos adaptamos a<br><span style="color:var(--c)">cualquier negocio</span></h2>
+    <p class="ssub">No importa tu rubro, tu tamaño ni los sistemas que usás. Si tenés un problema de gestión, PulseDesk lo resuelve.</p>
+  </div>
+  <div class="igrid mb rev">
+    <div class="icard"><span class="iem">🛍️</span><div class="itit">COMERCIOS</div><div class="idesc">Tiendas, negocios de barrio, distribuidoras y mayoristas.</div></div>
+    <div class="icard"><span class="iem">🍕</span><div class="itit">GASTRONOMÍA</div><div class="idesc">Restaurantes, delivery, rotiserías y catering.</div></div>
+    <div class="icard"><span class="iem">🏗️</span><div class="itit">CONSTRUCCIÓN</div><div class="idesc">Ferreterías, corralones, materiales y proveedores.</div></div>
+    <div class="icard"><span class="iem">💊</span><div class="itit">SALUD</div><div class="idesc">Farmacias, clínicas, consultorios y laboratorios.</div></div>
+  </div>
+  <div class="igrid rev d1">
+    <div class="icard"><span class="iem">👗</span><div class="itit">INDUMENTARIA</div><div class="idesc">Ropa, calzado, accesorios, moda mayorista y minorista.</div></div>
+    <div class="icard"><span class="iem">🚗</span><div class="itit">AUTOMOTRIZ</div><div class="idesc">Concesionarias, talleres, repuestos y lubricentros.</div></div>
+    <div class="icard"><span class="iem">📦</span><div class="itit">LOGÍSTICA</div><div class="idesc">Depósitos, distribución, envíos y gestión de entregas.</div></div>
+    <div class="icard hl"><span class="iem">✨</span><div class="itit">TU RUBRO</div><div class="idesc">Si no está acá, igual lo resolvemos. <strong style="color:var(--c)">Cualquier caso.</strong></div></div>
+  </div>
+  <div class="promise rev">
+    <div class="pgrid">
+      <div>
+        <span class="stag">// nuestra promesa</span>
+        <h3>Cualquiera sea tu caso,<br><span style="color:var(--c)">lo resolvemos.</span></h3>
+        <p style="margin-top:14px">No vendemos un producto genérico. <strong>Analizamos tu negocio específico</strong>, entendemos cómo trabajás, qué problemas tenés y diseñamos una solución a medida. Si sos una PYME de 2 personas o una empresa con 200 empleados, PulseDesk se adapta a vos, no al revés.</p>
+        <div class="prow">
+          <div><div class="psn">100%</div><div class="psl">A medida</div></div>
+          <div><div class="psn">0</div><div class="psl">Soluciones genéricas</div></div>
+          <div><div class="psn">∞</div><div class="psl">Posibilidades</div></div>
+        </div>
+      </div>
+      <div class="clist">
+        <div class="cli">✅ <span>Consultoría inicial <strong>gratis</strong></span></div>
+        <div class="cli">✅ <span>Desarrollo <strong>personalizado</strong></span></div>
+        <div class="cli">✅ <span>Soporte en <strong>español</strong></span></div>
+        <div class="cli">✅ <span>Escalable con tu <strong>crecimiento</strong></span></div>
+        <div class="cli chl">⚡ <span style="color:var(--c)">Activo en <strong>72 horas</strong></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMOS -->
+<section id="demos">
+  <div class="sh rev">
+    <span class="stag">// demos interactivos</span>
+    <h2 class="stit">Probalo vos mismo.<br><span style="color:var(--c)">Ahora. En vivo.</span></h2>
+    <p class="ssub">Estas demos funcionan de verdad. Interactuá con cada una y mirá lo que PulseDesk puede hacer por tu negocio.</p>
+  </div>
+  <div class="dtabs">
+    <button class="dtab on" onclick="swDemo('chat',this)">🤖 Chatbot</button>
+    <button class="dtab" onclick="swDemo('flyer',this)">🎨 Flyer IA</button>
+    <button class="dtab" onclick="swDemo('stock',this)">📊 Stock</button>
+    <button class="dtab" onclick="swDemo('notif',this)">🔔 Alertas</button>
+  </div>
+
+  <div class="dpanel on" id="dp-chat">
+    <div class="dd">
+      <h3>Chatbot de Pedidos</h3>
+      <p>Tu asistente virtual que atiende clientes 24/7. Responde consultas, toma pedidos y los procesa sin que muevas un dedo.</p>
+      <ul class="dbl">
+        <li><strong>Conecta con WhatsApp, Instagram y tu web</strong></li>
+        <li><strong>Verifica stock antes de confirmar</strong></li>
+        <li><strong>Carga el pedido y dispara el dashboard</strong></li>
+        <li><strong>Notifica al vendedor asignado</strong></li>
+        <li><strong>Envía confirmación al cliente</strong></li>
+      </ul>
+      <p style="color:var(--gr);font-size:12px">Probá escribir: <span style="color:var(--c)">"hola"</span>, <span style="color:var(--c)">"precio"</span>, <span style="color:var(--c)">"quiero pedir"</span>, <span style="color:var(--c)">"stock"</span>, <span style="color:var(--c)">"deuda"</span></p>
+    </div>
+    <div class="dui">
+      <div class="duih">
+        <div class="duih-d" style="background:#ff3355"></div>
+        <div class="duih-d" style="background:#ff6b35"></div>
+        <div class="duih-d" style="background:#00ff88"></div>
+        <span class="duih-t">⚡ PulseDesk Chat — Demo en Vivo</span>
+      </div>
+      <div class="cbody" id="chatBody">
+        <div class="cm cmb">¡Hola! 👋 Soy el asistente de <strong>TuEmpresa</strong>. ¿En qué te puedo ayudar?</div>
+        <div class="cm cms">🟢 Sistema conectado · Stock actualizado · Dashboard activo</div>
+      </div>
+      <div class="cinp">
+        <input class="ci" id="chatIn" type="text" placeholder="Escribí tu mensaje..." onkeypress="if(event.key==='Enter')sendChat()">
+        <button class="csend" onclick="sendChat()">ENVIAR</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dpanel" id="dp-flyer">
+    <div class="dd">
+      <h3>Generador de Flyers con IA</h3>
+      <p>Creá flyers de ventas profesionales en segundos. La IA se encarga del diseño, vos solo ponés los datos.</p>
+      <ul class="dbl">
+        <li><strong>Diseño automático con tu marca</strong></li>
+        <li><strong>Múltiples formatos: stories, post, banner</strong></li>
+        <li><strong>Programación automática en redes</strong></li>
+        <li><strong>Variaciones por segmento de cliente</strong></li>
+      </ul>
+    </div>
+    <div class="dui">
+      <div class="duih">
+        <div class="duih-d" style="background:#ff3355"></div>
+        <div class="duih-d" style="background:#ff6b35"></div>
+        <div class="duih-d" style="background:#00ff88"></div>
+        <span class="duih-t">🎨 Generador de Flyers — Demo</span>
+      </div>
+      <div class="fbody">
+        <div class="fctrl">
+          <input class="finp" id="fProd" type="text" value="Auriculares Bluetooth Pro">
+          <input class="finp" id="fPrecio" type="text" value="$29.999">
+          <input class="finp" id="fDesc" type="text" value="¡Calidad premium al mejor precio!">
+          <button class="fgbtn" onclick="genFlyer()">⚡ GENERAR FLYER CON IA</button>
+        </div>
+        <div class="fprev" id="fprev">
+          <div class="fpt" id="fpT">AURICULARES BLUETOOTH PRO</div>
+          <div class="fpp" id="fpP">$29.999</div>
+          <div class="fpb">🔥 OFERTA EXCLUSIVA</div>
+          <div class="fpf" id="fpD">¡Calidad premium al mejor precio!</div>
+          <div style="margin-top:12px;font-family:var(--f3);font-size:9px;color:var(--c3);letter-spacing:2px">PULSEDESK.AI · GENERADO AUTOMÁTICAMENTE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dpanel" id="dp-stock">
+    <div class="dd">
+      <h3>Control de Stock en Tiempo Real</h3>
+      <p>Visualizá y gestioná tu inventario. El bot consulta disponibilidad al instante y bloquea pedidos sin stock.</p>
+      <ul class="dbl">
+        <li><strong>Alertas de stock bajo automáticas</strong></li>
+        <li><strong>Bloqueo de pedidos sin stock</strong></li>
+        <li><strong>Sincronización con tu proveedor</strong></li>
+        <li><strong>Historial de movimientos</strong></li>
+      </ul>
+    </div>
+    <div class="dui">
+      <div class="duih">
+        <div class="duih-d" style="background:#ff3355"></div>
+        <div class="duih-d" style="background:#ff6b35"></div>
+        <div class="duih-d" style="background:#00ff88"></div>
+        <span class="duih-t">📊 Panel de Stock — Live</span>
+      </div>
+      <div class="stbody">
+        <table class="sttbl">
+          <thead><tr><th>Producto</th><th>Precio</th><th>Stock</th><th>Estado</th></tr></thead>
+          <tbody id="stBody">
+            <tr><td class="snm">iPhone 15 Pro 128GB</td><td class="spr">$1.299.000</td><td class="sqt">47</td><td><span class="sst sok">DISPONIBLE</span></td></tr>
+            <tr><td class="snm">Samsung Galaxy S24</td><td class="spr">$987.000</td><td class="sqt">3</td><td><span class="sst slow">STOCK BAJO</span></td></tr>
+            <tr><td class="snm">AirPods Pro 2da Gen</td><td class="spr">$389.000</td><td class="sqt">22</td><td><span class="sst sok">DISPONIBLE</span></td></tr>
+            <tr><td class="snm">PlayStation 5 Slim</td><td class="spr">$2.150.000</td><td class="sqt">0</td><td><span class="sst sout">SIN STOCK</span></td></tr>
+            <tr><td class="snm">MacBook Air M3</td><td class="spr">$3.450.000</td><td class="sqt">8</td><td><span class="sst sok">DISPONIBLE</span></td></tr>
+          </tbody>
+        </table>
+        <div class="st-ft"><span class="ldot"></span>Actualización automática · Última sync: hace 2s</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dpanel" id="dp-notif">
+    <div class="dd">
+      <h3>Sistema de Alertas Inteligentes</h3>
+      <p>Tu equipo siempre informado. PulseDesk avisa automáticamente cuando pasa algo importante en tu negocio.</p>
+      <ul class="dbl">
+        <li><strong>Nuevo pedido → avisa al vendedor asignado</strong></li>
+        <li><strong>Cliente sin comprar → activa seguimiento</strong></li>
+        <li><strong>Deuda vencida → envía recordatorio</strong></li>
+        <li><strong>Stock bajo → alerta al encargado</strong></li>
+      </ul>
+      <button class="nsimb" onclick="trigNotif()">⚡ SIMULAR EVENTO</button>
+    </div>
+    <div class="dui">
+      <div class="duih">
+        <div class="duih-d" style="background:#ff3355"></div>
+        <div class="duih-d" style="background:#ff6b35"></div>
+        <div class="duih-d" style="background:#00ff88"></div>
+        <span class="duih-t">🔔 Centro de Notificaciones</span>
+      </div>
+      <div class="nbody" id="notifBody">
+        <div class="ncard"><div class="ni nig">🛒</div><div class="ntxt"><div class="ntit">Nuevo pedido recibido</div><div class="nbod">Juan Pérez compró 2x Auriculares — $58.000. Vendedor: <strong>Carlos</strong></div></div><div class="ntime">hace 1m</div></div>
+        <div class="ncard"><div class="ni nio">⚠️</div><div class="ntxt"><div class="ntit">Stock bajo: Samsung S24</div><div class="nbod">Solo <strong>3 unidades</strong>. Reponer antes de mañana.</div></div><div class="ntime">hace 5m</div></div>
+        <div class="ncard"><div class="ni nir">💰</div><div class="ntxt"><div class="ntit">Deuda vencida — M. Rodríguez</div><div class="nbod">Saldo: <strong>$47.200</strong> — Recordatorio enviado.</div></div><div class="ntime">hace 12m</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section id="how">
+  <div class="sh rev">
+    <span class="stag">// proceso</span>
+    <h2 class="stit">De cero a<br><span style="color:var(--c)">automático en 72hs</span></h2>
+    <p class="ssub">Sin código, sin complicaciones. Nosotros configuramos todo por vos.</p>
+  </div>
+  <div class="hw2">
+    <div class="hline"></div>
+    <div class="steps">
+      <div class="step rev">
+        <div class="sc"><div class="snum">// PASO 01</div><div class="stit2">Análisis de tu negocio</div><p class="sdesc">Hacemos una reunión para entender cómo trabajás, qué sistemas usás y qué procesos querés automatizar. Sin formularios raros, solo una charla.</p></div>
+        <div class="sctr"><div class="sdot">01</div></div>
+        <div class="sv"></div>
+      </div>
+      <div class="step rev">
+        <div class="sv"></div>
+        <div class="sctr"><div class="sdot">02</div></div>
+        <div class="sc"><div class="snum">// PASO 02</div><div class="stit2">Configuración de la IA</div><p class="sdesc">Entrenamos el chatbot con tu catálogo, precios, respuestas frecuentes y reglas de negocio. La IA aprende a hablar como tu empresa.</p></div>
+      </div>
+      <div class="step rev">
+        <div class="sc"><div class="snum">// PASO 03</div><div class="stit2">Integración y Dashboard</div><p class="sdesc">Conectamos con tu ERP, hoja de cálculo, WhatsApp Business e Instagram. Instalamos el dashboard en tu TV de planta listo para recibir pedidos en tiempo real.</p></div>
+        <div class="sctr"><div class="sdot">03</div></div>
+        <div class="sv"></div>
+      </div>
+      <div class="step rev">
+        <div class="sv"></div>
+        <div class="sctr"><div class="sdot">04</div></div>
+        <div class="sc"><div class="snum">// PASO 04</div><div class="stit2">Lanzamiento y soporte</div><p class="sdesc">Activamos el sistema con monitoreo en vivo. En las primeras 72hs ajustamos todo hasta que funcione perfecto. Después, ya es tuyo.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="sh rev">
+    <span class="stag">// planes</span>
+    <h2 class="stit">Invertí en<br><span style="color:var(--c)">automatización</span></h2>
+    <p class="ssub">Pagás una sola vez o por mes. Sin sorpresas, sin costos ocultos.</p>
+  </div>
+  <div class="pg">
+    <div class="pcard rev">
+      <div class="pname">Starter</div>
+      <div class="pamt"><sub>$</sub>49.990</div>
+      <div class="pper">/ mes · hasta 500 interacciones</div>
+      <ul class="pfl">
+        <li class="yes"><span class="ck">▶</span>Chatbot de ventas básico</li>
+        <li class="yes"><span class="ck">▶</span>Consulta de stock y precios</li>
+        <li class="yes"><span class="ck">▶</span>Notificaciones a 1 vendedor</li>
+        <li class="yes"><span class="ck">▶</span>Integración WhatsApp</li>
+        <li><span class="no">—</span>Dashboard de planta en TV</li>
+        <li><span class="no">—</span>Generador de flyers</li>
+        <li><span class="no">—</span>Gestión de deudas</li>
+      </ul>
+      <button class="pbtn pbg">EMPEZAR</button>
+    </div>
+    <div class="pcard feat rev d1">
+      <div class="pname">Pro</div>
+      <div class="pamt"><sub>$</sub>119.990</div>
+      <div class="pper">/ mes · interacciones ilimitadas</div>
+      <ul class="pfl">
+        <li class="yes"><span class="ck">▶</span>Chatbot avanzado con IA</li>
+        <li class="yes"><span class="ck">▶</span>Stock, precios y pedidos</li>
+        <li class="yes"><span class="ck">▶</span>Equipo de vendedores ilimitado</li>
+        <li class="yes"><span class="ck">▶</span>WhatsApp + Instagram + Web</li>
+        <li class="yes"><span class="ck">▶</span>📺 Dashboard de planta en TV</li>
+        <li class="yes"><span class="ck">▶</span>Generador de flyers IA</li>
+        <li class="yes"><span class="ck">▶</span>Gestión de deudas automática</li>
+      </ul>
+      <button class="pbtn pbs">EMPEZAR</button>
+    </div>
+    <div class="pcard rev d2">
+      <div class="pname">Enterprise</div>
+      <div class="pamt" style="font-size:32px;padding-top:8px">A medida</div>
+      <div class="pper">Contactanos para tu caso</div>
+      <ul class="pfl">
+        <li class="yes"><span class="ck">▶</span>Todo lo del plan Pro</li>
+        <li class="yes"><span class="ck">▶</span>API y webhooks propios</li>
+        <li class="yes"><span class="ck">▶</span>IA entrenada específicamente</li>
+        <li class="yes"><span class="ck">▶</span>Integración ERP/CRM custom</li>
+        <li class="yes"><span class="ck">▶</span>SLA garantizado</li>
+        <li class="yes"><span class="ck">▶</span>Soporte 24/7 dedicado</li>
+        <li class="yes"><span class="ck">▶</span>Onboarding presencial</li>
+      </ul>
+      <button class="pbtn pbg">CONSULTAR</button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-bg"></div>
+  <div class="cta-wrap rev">
+    <span class="stag">// empezá hoy</span>
+    <h2 class="cta-t glitch">¿Listo para<br><span style="color:var(--c)">escalar?</span></h2>
+    <p class="cta-s">Dejanos tu email y en menos de 24 horas uno de nuestros especialistas te contacta para mostrarte todo lo que PulseDesk puede hacer por tu negocio.</p>
+    <div class="cta-form">
+      <input class="cemail" id="ctaEmail" type="email" placeholder="tu@email.com">
+      <button class="csub" onclick="submitCTA()">ARRANCAR ⚡</button>
+    </div>
+    <p class="cta-note">Sin compromiso. Sin spam. Solo resultados.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flogo">PULSE<span>DESK</span></div>
+  <div class="flinks">
+    <a href="#features">Funciones</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#demos">Demos</a>
+    <a href="#adaptamos">Tu Negocio</a>
+    <a href="#pricing">Planes</a>
+    <a href="mailto:hola@pulsedesk.ai">Contacto</a>
+  </div>
+  <div class="fcopy">© 2025 PulseDesk · IA que trabaja por vos</div>
+</footer>
+
+<script>
+// === CANVAS ===
+(function(){
+  const cv=document.getElementById('bgc'),ctx=cv.getContext('2d');
+  let W,H,pts=[];
+  function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
+  rs();window.addEventListener('resize',rs);
+  function P(){this.reset();}
+  P.prototype.reset=function(){this.x=Math.random()*W;this.y=Math.random()*H;this.vx=(Math.random()-.5)*.3;this.vy=(Math.random()-.5)*.3;this.s=Math.random()*1.3+.4;this.op=Math.random()*.45+.1;this.col=Math.random()>.6?'#00d4ff':'#005580';};
+  P.prototype.u=function(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>W||this.y<0||this.y>H)this.reset();};
+  P.prototype.d=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.s,0,Math.PI*2);ctx.fillStyle=this.col;ctx.globalAlpha=this.op;ctx.fill();ctx.globalAlpha=1;};
+  for(var i=0;i<150;i++)pts.push(new P());
+  var pulses=[];
+  function ap(){pulses.push({x:Math.random()*W,y:Math.random()*H,r:0,max:60+Math.random()*70,op:.22});setTimeout(ap,1800+Math.random()*2200);}
+  ap();
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    ctx.strokeStyle='rgba(0,32,50,.4)';ctx.lineWidth=.5;
+    for(var x=0;x<W;x+=80){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+    for(var y=0;y<H;y+=80){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+    pts.forEach(function(p){p.u();p.d();});
+    for(var i=0;i<pts.length;i++)for(var j=i+1;j<pts.length;j++){var dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<90){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle='rgba(0,212,255,'+(0.07*(1-d/90))+')';ctx.lineWidth=.4;ctx.stroke();}}
+    pulses=pulses.filter(function(p){p.r+=1;p.op-=.002;if(p.op<=0)return false;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.strokeStyle='rgba(0,212,255,'+p.op+')';ctx.lineWidth=1;ctx.stroke();return true;});
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// === REVEAL ===
+var ro=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:.1});
+document.querySelectorAll('.rev').forEach(function(el){ro.observe(el);});
+
+// === COUNTERS ===
+var co=new IntersectionObserver(function(entries){entries.forEach(function(e){if(!e.isIntersecting)return;var el=e.target,t=parseInt(el.dataset.count),s=t>=100?'+':'',n=0,inc=t/60;var tm=setInterval(function(){n+=inc;if(n>=t){el.textContent=t+s;clearInterval(tm);}else el.textContent=Math.floor(n)+s;},16);co.unobserve(el);});},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(function(el){co.observe(el);});
+
+// === CLOCK ===
+function tick(){var n=new Date(),h=String(n.getHours()).padStart(2,'0'),m=String(n.getMinutes()).padStart(2,'0'),s=String(n.getSeconds()).padStart(2,'0'),el=document.getElementById('dashClock');if(el)el.textContent=h+':'+m+':'+s;}
+tick();setInterval(tick,1000);
+
+// === DEMO TABS ===
+function swDemo(id,btn){
+  document.querySelectorAll('.dtab').forEach(function(t){t.classList.remove('on');});
+  btn.classList.add('on');
+  document.querySelectorAll('.dpanel').forEach(function(p){p.classList.remove('on');});
+  document.getElementById('dp-'+id).classList.add('on');
+}
+
+// === CHAT ===
+var orderN=1050;
+var botR={
+  hola:"¡Hola! 👋 Soy el asistente de ventas de TuEmpresa.\n\nTe puedo ayudar con:\n• Ver precios y stock\n• Hacer un pedido\n• Consultar tu saldo\n• Cualquier consulta\n\n¿Por dónde empezamos?",
+  precio:"📊 Precios actualizados:\n\n• iPhone 15 Pro: $1.299.000\n• Samsung S24: $987.000\n• AirPods Pro: $389.000\n• MacBook Air M3: $3.450.000\n\n¿Querés reservar alguno?",
+  stock:"📦 Stock disponible ahora:\n\n✅ iPhone 15 Pro — 47 uds\n⚠️ Samsung S24 — 3 uds (¡poco stock!)\n✅ AirPods Pro — 22 uds\n❌ PS5 Slim — sin stock\n\n¿Hacemos un pedido?",
+  deuda:"💰 Consultando tu saldo...\n\nTenés un saldo pendiente de $47.200.\nVencimiento: en 3 días.\n\nTe mando el link de pago ahora mismo 📲",
+  def:["¡Claro! ¿En qué más te puedo ayudar?","Entendido. ¿Querés ver el catálogo o buscás algo específico?","Dame un segundo para verificar eso en el sistema."]
+};
+function getBot(msg){
+  var m=msg.toLowerCase();
+  if(m.match(/hola|buenas|buen/)) return botR.hola;
+  if(m.match(/precio|cuánto|vale|cuesta/)) return botR.precio;
+  if(m.match(/stock|disponible|tienen/)) return botR.stock;
+  if(m.match(/deuda|saldo|debo|pagar/)) return botR.deuda;
+  if(m.match(/pedido|quiero|comprar|dame|pedir/)){
+    orderN++;
+    return "✅ Pedido #PD-"+orderN+" confirmado!\n\nTotal estimado según tu consulta.\n📬 Tu vendedor fue notificado\n📺 Cayó al dashboard de planta al instante\n💳 Link de pago enviado a tu WhatsApp";
+  }
+  return botR.def[Math.floor(Math.random()*3)];
+}
+function addMsg(txt,cls){
+  var body=document.getElementById('chatBody'),d=document.createElement('div');
+  d.className='cm '+cls;d.innerHTML=txt.replace(/\n/g,'<br>');
+  body.appendChild(d);body.scrollTop=body.scrollHeight;
+}
+function sendChat(){
+  var inp=document.getElementById('chatIn'),msg=inp.value.trim();if(!msg)return;
+  addMsg(msg,'cmu');inp.value='';
+  var body=document.getElementById('chatBody'),t=document.createElement('div');
+  t.id='typ';t.className='cm cmb';
+  t.innerHTML='<span style="display:flex;gap:4px"><span style="width:5px;height:5px;background:#00d4ff;border-radius:50%;animation:td 1.2s infinite;display:inline-block"></span><span style="width:5px;height:5px;background:#00d4ff;border-radius:50%;animation:td 1.2s .2s infinite;display:inline-block"></span><span style="width:5px;height:5px;background:#00d4ff;border-radius:50%;animation:td 1.2s .4s infinite;display:inline-block"></span></span>';
+  body.appendChild(t);body.scrollTop=body.scrollHeight;
+  setTimeout(function(){var x=document.getElementById('typ');if(x)x.remove();addMsg(getBot(msg),'cmb');},900+Math.random()*500);
+}
+
+// === FLYER ===
+function genFlyer(){
+  var btn=document.querySelector('.fgbtn');btn.textContent='⚡ GENERANDO...';btn.disabled=true;
+  setTimeout(function(){
+    document.getElementById('fpT').textContent=(document.getElementById('fProd').value||'Producto').toUpperCase();
+    document.getElementById('fpP').textContent=document.getElementById('fPrecio').value||'$0';
+    document.getElementById('fpD').textContent=document.getElementById('fDesc').value||'';
+    var p=document.getElementById('fprev');p.style.borderColor='#00d4ff';p.style.boxShadow='0 0 30px rgba(0,212,255,.3)';
+    setTimeout(function(){p.style.borderColor='#005580';p.style.boxShadow='none';},2000);
+    btn.textContent='⚡ GENERAR FLYER CON IA';btn.disabled=false;
+  },1100);
+}
+
+// === STOCK LIVE ===
+setInterval(function(){
+  var rows=document.querySelectorAll('#stBody tr'),row=rows[Math.floor(Math.random()*rows.length)];
+  if(!row)return;
+  var qc=row.cells[2],sc=row.cells[3],q=parseInt(qc.textContent);
+  q=Math.max(0,q+Math.floor((Math.random()-.4)*4));
+  qc.textContent=q;qc.style.color='#00d4ff';setTimeout(function(){qc.style.color='';},700);
+  var sp=sc.querySelector('span');
+  if(q===0){sp.className='sst sout';sp.textContent='SIN STOCK';}
+  else if(q<=5){sp.className='sst slow';sp.textContent='STOCK BAJO';}
+  else{sp.className='sst sok';sp.textContent='DISPONIBLE';}
+},3200);
+
+// === NOTIF DEMO ===
+var nPool=[
+  {icon:'🛒',cls:'nig',t:'Nuevo pedido — Lucas García',b:'3x Teclado K380 — $55.500. Asignado: <strong>Marta</strong>'},
+  {icon:'💬',cls:'nib',t:'Cliente consultó stock',b:'Ana Martínez preguntó por iPhone 15. Respondido ✅'},
+  {icon:'⚠️',cls:'nio',t:'Stock crítico: AirPods 5 uds',b:'Proveedor notificado automáticamente.'},
+  {icon:'💰',cls:'nir',t:'Recordatorio — R. Díaz',b:'Deuda $82.000 — WhatsApp enviado.'},
+  {icon:'⭐',cls:'nig',t:'¡Venta completada!',b:'MacBook Air M3 — $3.450.000. Comisión registrada.'},
+  {icon:'📺',cls:'nib',t:'Pedido en dashboard de planta',b:'#PD-1051 apareció en el TV. En preparación.'},
+];
+var nIdx=0;
+function trigNotif(){
+  var n=nPool[nIdx%nPool.length];nIdx++;
+  var body=document.getElementById('notifBody'),d=document.createElement('div');
+  d.className='ncard n-in';d.style.cssText='opacity:0;transform:translateX(28px)';
+  d.innerHTML='<div class="ni '+n.cls+'">'+n.icon+'</div><div class="ntxt"><div class="ntit">'+n.t+'</div><div class="nbod">'+n.b+'</div></div><div class="ntime">Ahora</div>';
+  body.insertBefore(d,body.firstChild);
+  requestAnimationFrame(function(){d.style.transition='all .4s ease';d.style.opacity='1';d.style.transform='translateX(0)';});
+  if(body.children.length>5)body.removeChild(body.lastChild);
+}
+
+// === DASHBOARD SIM ===
+var simOrders=[
+  {id:'#PD-1052',c:'Valeria Romero',i:'2x Samsung Galaxy S24',p:'$1.974.000',ch:'📱 WhatsApp'},
+  {id:'#PD-1053',c:'Diego Fernández',i:'1x MacBook Air M3 + Magic Mouse',p:'$3.620.000',ch:'🌐 Web'},
+  {id:'#PD-1054',c:'Camila Gómez',i:'3x Hub USB-C · 5x Cable Lightning',p:'$28.500',ch:'💬 Instagram'},
+  {id:'#PD-1055',c:'Martín López',i:'1x Monitor 4K 27" + Soporte',p:'$312.000',ch:'📱 WhatsApp'},
+  {id:'#PD-1056',c:'Sofía Rivas',i:'2x AirPods Pro 2da Gen',p:'$778.000',ch:'🌐 Web'},
+];
+var siIdx=0,kpiN=3;
+function simOrder(){
+  var o=simOrders[siIdx%simOrders.length];siIdx++;
+  var col=document.getElementById('colNew'),card=document.createElement('div');
+  card.className='ocard new-o incoming';
+  card.innerHTML='<div class="oc-top"><span class="oc-id">'+o.id+'</span><span class="oc-st st-new">NUEVO</span></div><div class="oc-client">'+o.c+'</div><div class="oc-items">'+o.i+'</div><div class="oc-foot"><span class="oc-price">'+o.p+'</span><span class="oc-ch">'+o.ch+'</span><span class="oc-time">Ahora mismo</span></div><div class="oc-bar"><div class="oc-fill fill-new"></div></div>';
+  col.insertBefore(card,col.firstChild);
+  if(col.children.length>4)col.removeChild(col.lastChild);
+  kpiN++;
+  var kn=document.getElementById('kN');if(kn)kn.textContent=kpiN;
+  var cn=document.getElementById('cntNew');if(cn)cn.textContent=kpiN;
+  // alert
+  var alerts=document.getElementById('colAlerts'),al=document.createElement('div');
+  al.className='aitem a-in';al.style.cssText='opacity:0;transform:translateX(16px)';
+  al.innerHTML='<div class="aico aib">📺</div><div class="atxt"><div class="atit">'+o.id+' en dashboard</div><div class="abod">'+o.c+' — '+o.i+'</div></div><div class="atime">Ahora</div>';
+  alerts.insertBefore(al,alerts.firstChild);
+  requestAnimationFrame(function(){al.style.transition='all .4s ease';al.style.opacity='1';al.style.transform='translateX(0)';});
+  if(alerts.children.length>5)alerts.removeChild(alerts.lastChild);
+  // button flash
+  var btn=document.getElementById('simBtn');
+  btn.textContent='✅ PEDIDO RECIBIDO EN PLANTA!';btn.style.background='#00ff88';btn.style.color='#020810';
+  setTimeout(function(){btn.textContent='⚡ SIMULAR NUEVO PEDIDO EN VIVO';btn.style.background='';btn.style.color='';},2200);
+}
+setInterval(function(){if(document.getElementById('kN'))simOrder();},14000);
+
+// === HERO CHAT ===
+setTimeout(function(){
+  var hc=document.getElementById('heroChat');if(!hc)return;
+  var typ=hc.querySelector('.ptyp');if(typ)typ.remove();
+  var m1=document.createElement('div');m1.className='pm pbot';
+  m1.innerHTML='✅ Pedido confirmado! 3x K380 — <strong>$55.500</strong><br>📺 Cayó al dashboard de planta';
+  hc.appendChild(m1);
+  setTimeout(function(){var m2=document.createElement('div');m2.className='pm psys';m2.textContent='⚡ Sistema cargado · Carlos notificado · Dashboard actualizado';hc.appendChild(m2);},1000);
+},2200);
+
+// === CTA ===
+function submitCTA(){
+  var email=document.getElementById('ctaEmail').value,btn=document.querySelector('.csub');
+  if(!email||!email.includes('@')){document.getElementById('ctaEmail').style.borderColor='#ff3355';setTimeout(function(){document.getElementById('ctaEmail').style.borderColor='';},1500);return;}
+  btn.textContent='✅ ENVIADO!';btn.style.background='#00ff88';btn.style.color='#020810';
+  document.getElementById('ctaEmail').value='';
+  setTimeout(function(){btn.textContent='ARRANCAR ⚡';btn.style.background='#00d4ff';btn.style.color='#020810';},3000);
+}
+</script>
+</body>
+</html>
