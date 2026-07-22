@@ -1,0 +1,12 @@
+{
+  "name": "PulseDesk",
+  "short_name": "PulseDesk",
+  "description": "Servicio técnico, infraestructura y desarrollo de software en Rosario.",
+  "start_url": "__BASE_URL__/",
+  "display": "standalone",
+  "background_color": "#071019",
+  "theme_color": "#071019",
+  "icons": [
+    {"src":"__BASE_URL__/assets/icons/favicon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}
+  ]
+}
