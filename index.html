@@ -2,35 +2,153 @@
 <html lang="es-AR">
 <head>
   <meta charset="UTF-8">
+
+  <!-- =========================================================
+       CONFIGURACIÓN BÁSICA
+  ========================================================== -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Servicio Técnico PC y Software en Rosario | PulseDesk</title>
-  <meta name="description" content="PulseDesk: reparación y mantenimiento de PC, soporte IT a domicilio y para empresas, redes, cámaras y desarrollo de software a medida en Rosario.">
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+
+  <meta
+    name="description"
+    content="PulseDesk: reparación y mantenimiento de PC, soporte IT a domicilio y para empresas, redes, cámaras y desarrollo de software a medida en Rosario."
+  >
+
+  <meta
+    name="robots"
+    content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+  >
+
   <meta name="author" content="PulseDesk">
   <meta name="theme-color" content="#071019">
+
+
+  <!-- =========================================================
+       SEO / CANONICAL
+  ========================================================== -->
   <link rel="canonical" href="__BASE_URL__/">
-  <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
-  <link rel="manifest" href="./site.webmanifest">
+
+
+  <!-- =========================================================
+       FAVICON PULSEDESK
+       
+       IMPORTANTE:
+       El archivo tiene que existir exactamente en:
+       /assets/icons/favicon.svg
+  ========================================================== -->
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    sizes="any"
+    href="/assets/icons/favicon.svg?v=3"
+  >
+
+  <link
+    rel="shortcut icon"
+    type="image/svg+xml"
+    href="/assets/icons/favicon.svg?v=3"
+  >
+
+
+  <!-- =========================================================
+       WEB APP MANIFEST
+  ========================================================== -->
+  <link rel="manifest" href="/site.webmanifest">
+
+
+  <!-- =========================================================
+       FUENTES
+  ========================================================== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="./assets/img/hardware-technician-1600.webp" fetchpriority="high">
-  <link rel="stylesheet" href="./styles.css">
 
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <!-- =========================================================
+       PRELOAD HERO
+  ========================================================== -->
+  <link
+    rel="preload"
+    as="image"
+    href="/assets/img/hardware-technician-1600.webp"
+    fetchpriority="high"
+  >
+
+
+  <!-- =========================================================
+       CSS PRINCIPAL
+  ========================================================== -->
+  <link rel="stylesheet" href="/styles.css">
+
+
+  <!-- =========================================================
+       OPEN GRAPH / WHATSAPP / FACEBOOK / LINKEDIN
+  ========================================================== -->
   <meta property="og:locale" content="es_AR">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="PulseDesk | Servicio Técnico PC y Soluciones Tecnológicas en Rosario">
-  <meta property="og:description" content="Servicio técnico, hardware, software, soporte a empresas y desarrollo de sistemas a medida. Tecnología resuelta de punta a punta.">
+
+  <meta
+    property="og:title"
+    content="PulseDesk | Servicio Técnico PC y Soluciones Tecnológicas en Rosario"
+  >
+
+  <meta
+    property="og:description"
+    content="Servicio técnico, hardware, software, soporte a empresas y desarrollo de sistemas a medida. Tecnología resuelta de punta a punta."
+  >
+
   <meta property="og:url" content="__BASE_URL__/">
   <meta property="og:site_name" content="PulseDesk">
-  <meta property="og:image" content="__BASE_URL__/assets/img/og-cover.jpg">
+
+  <meta
+    property="og:image"
+    content="__BASE_URL__/assets/img/og-cover.jpg"
+  >
+
+  <meta
+    property="og:image:secure_url"
+    content="__BASE_URL__/assets/img/og-cover.jpg"
+  >
+
+  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="PulseDesk | Tecnología que resuelve">
-  <meta name="twitter:description" content="Servicio técnico PC, soporte IT, infraestructura y software a medida en Rosario.">
-  <meta name="twitter:image" content="__BASE_URL__/assets/img/og-cover.jpg">
 
+  <meta
+    property="og:image:alt"
+    content="PulseDesk - Servicio técnico, infraestructura y desarrollo de software"
+  >
+
+
+  <!-- =========================================================
+       TWITTER / X
+  ========================================================== -->
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta
+    name="twitter:title"
+    content="PulseDesk | Tecnología que resuelve"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Servicio técnico PC, soporte IT, infraestructura y software a medida en Rosario."
+  >
+
+  <meta
+    name="twitter:image"
+    content="__BASE_URL__/assets/img/og-cover.jpg"
+  >
+
+
+  <!-- =========================================================
+       DATOS ESTRUCTURADOS / SCHEMA.ORG
+  ========================================================== -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -42,7 +160,10 @@
         "url": "__BASE_URL__/",
         "logo": "__BASE_URL__/assets/icons/favicon.svg",
         "telephone": "+543416018944",
-        "areaServed": {"@type":"City","name":"Rosario, Santa Fe, Argentina"},
+        "areaServed": {
+          "@type": "City",
+          "name": "Rosario, Santa Fe, Argentina"
+        },
         "description": "Servicio técnico de computadoras, soporte informático para empresas, infraestructura IT, redes, cámaras, desarrollo de software a medida, automatizaciones, chatbots e inteligencia artificial."
       },
       {
@@ -50,26 +171,48 @@
         "@id": "__BASE_URL__/#website",
         "url": "__BASE_URL__/",
         "name": "PulseDesk",
-        "publisher": {"@id": "__BASE_URL__/#organization"},
+        "publisher": {
+          "@id": "__BASE_URL__/#organization"
+        },
         "inLanguage": "es-AR"
       },
       {
         "@type": "Service",
         "name": "Servicio técnico de PC en Rosario",
-        "provider": {"@id": "__BASE_URL__/#organization"},
+        "provider": {
+          "@id": "__BASE_URL__/#organization"
+        },
         "areaServed": "Rosario, Santa Fe",
-        "serviceType": ["Reparación de computadoras", "Mantenimiento de PC", "Instalación de SSD y RAM", "Soporte de Windows y drivers", "Soporte a domicilio"]
+        "serviceType": [
+          "Reparación de computadoras",
+          "Mantenimiento de PC",
+          "Instalación de SSD y RAM",
+          "Soporte de Windows y drivers",
+          "Soporte a domicilio"
+        ]
       },
       {
         "@type": "Service",
         "name": "Desarrollo de software a medida",
-        "provider": {"@id": "__BASE_URL__/#organization"},
+        "provider": {
+          "@id": "__BASE_URL__/#organization"
+        },
         "areaServed": "Argentina",
-        "serviceType": ["ERP", "Sistemas de gestión", "Facturación y stock", "Automatizaciones", "Chatbots", "IA para empresas", "Integraciones", "Pantallas y tótems"]
+        "serviceType": [
+          "ERP",
+          "Sistemas de gestión",
+          "Facturación y stock",
+          "Automatizaciones",
+          "Chatbots",
+          "IA para empresas",
+          "Integraciones",
+          "Pantallas y tótems"
+        ]
       }
     ]
   }
   </script>
+
 </head>
 <body>
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
