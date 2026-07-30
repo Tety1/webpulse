@@ -41,13 +41,36 @@
     navSections.forEach(section => navObserver.observe(section));
   }
 
-  // Scene switching works without GSAP too.
-  const activateScene = (step, imageSelector, activeClass = 'is-active', counterSelector) => {
+  // Scene switching remains compatible without GSAP. On capable browsers,
+  // a single wipe layer changes the photo without touching the copy layout.
+  const activateScene = (step, imageSelector, activeClass = 'is-active', counterSelector, wipeSelector) => {
     const index = Number(step.dataset.scene ?? step.dataset.devScene ?? 0);
-    qsa(imageSelector).forEach((img, i) => img.classList.toggle(activeClass, i === index));
-    if (counterSelector) {
-      const counter = qs(counterSelector);
-      if (counter) counter.textContent = String(index + 1).padStart(2, '0');
+    const images = qsa(imageSelector);
+    const previous = images.findIndex(img => img.classList.contains(activeClass));
+    const apply = () => {
+      images.forEach((img, i) => img.classList.toggle(activeClass, i === index));
+      if (counterSelector) {
+        const counter = qs(counterSelector);
+        if (counter) counter.textContent = String(index + 1).padStart(2, '0');
+      }
+    };
+    if (previous === index) return;
+    const container = images[0]?.parentElement;
+    const wipe = container && wipeSelector ? qs(wipeSelector, container) : null;
+    const scan = container ? qs('.scene-scan', container) : null;
+    if (reducedMotion || !window.gsap || !wipe) {
+      apply();
+      return;
+    }
+    gsap.killTweensOf([wipe, scan]);
+    gsap.set(wipe, { scaleX: 0, transformOrigin: 'left center' });
+    const tl = gsap.timeline();
+    tl.to(wipe, { scaleX: 1, duration: .24, ease: 'power3.in' })
+      .add(apply)
+      .set(wipe, { transformOrigin: 'right center' })
+      .to(wipe, { scaleX: 0, duration: .42, ease: 'power3.out' });
+    if (scan) {
+      gsap.fromTo(scan, { yPercent: 0, opacity: 0 }, { yPercent: 720, opacity: .7, duration: .72, ease: 'power1.inOut' });
     }
   };
 
@@ -59,10 +82,10 @@
       const step = entry.target;
       if (step.classList.contains('story-step')) {
         hardwareSteps.forEach(s => s.classList.toggle('is-active', s === step));
-        activateScene(step, '[data-scene-image]', 'is-active', '.visual-counter b');
+        activateScene(step, '[data-scene-image]', 'is-active', '.visual-counter b', '.scene-wipe-hardware');
       } else if (step.classList.contains('dev-step')) {
         devSteps.forEach(s => s.classList.toggle('is-active', s === step));
-        activateScene(step, '[data-dev-image]', 'is-active', '.dev-counter b');
+        activateScene(step, '[data-dev-image]', 'is-active', '.dev-counter b', '.scene-wipe-development');
       }
     });
   }, { rootMargin: '-38% 0px -42% 0px', threshold: 0 }) : null;
@@ -71,6 +94,94 @@
 
   if (reducedMotion || !window.gsap || !window.ScrollTrigger) return;
   gsap.registerPlugin(ScrollTrigger);
+  document.documentElement.classList.add('has-cinematic-motion');
+
+
+  // =======================================================
+  // CINEMATIC LAYERS — isolated from the original V5 layout.
+  // No GSAP pinning: CSS sticky chapters keep document flow stable.
+  // =======================================================
+  const motionMM = gsap.matchMedia();
+  motionMM.add('(min-width: 901px)', () => {
+    qsa('.cinematic-divider').forEach(section => {
+      const media = qs('.cinematic-divider-media img', section);
+      const copy = qs('.cinematic-divider-copy', section);
+      const line = qs('.cinematic-divider-line', section);
+      const panels = qsa('.cinematic-divider-panels i', section);
+      const grid = qs('.cinematic-divider-grid', section);
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: .8,
+          invalidateOnRefresh: true
+        }
+      });
+      tl.fromTo(media, { scale: 1.13, yPercent: 5 }, { scale: 1.01, yPercent: -3, ease: 'none' }, 0)
+        .fromTo(panels[0], { xPercent: 0 }, { xPercent: -102, ease: 'power2.inOut' }, .06)
+        .fromTo(panels[1], { xPercent: 0 }, { xPercent: 102, ease: 'power2.inOut' }, .06)
+        .fromTo(copy, { yPercent: 16, opacity: .05 }, { yPercent: 0, opacity: 1, ease: 'power2.out' }, .08)
+        .fromTo(line, { scaleX: 0 }, { scaleX: 1, ease: 'none' }, .1)
+        .fromTo(grid, { xPercent: -3 }, { xPercent: 3, ease: 'none' }, 0)
+        .to(copy, { yPercent: -10, opacity: .35, ease: 'none' }, .72)
+        .to(media, { scale: .98, filter: 'saturate(.7) contrast(1.1) brightness(.48)', ease: 'none' }, .72);
+    });
+  });
+  motionMM.add('(max-width: 900px)', () => {
+    qsa('.cinematic-divider-copy').forEach(copy => {
+      gsap.from(copy, { y: 38, opacity: 0, duration: .8, ease: 'power3.out', scrollTrigger: { trigger: copy, start: 'top 86%', once: true } });
+    });
+    qsa('.cinematic-divider-line').forEach(line => gsap.set(line, { scaleX: 1 }));
+  });
+
+  // Short section-opening curtains. They animate only once and never pin.
+  qsa('.section-curtain').forEach(curtain => {
+    const halves = qsa('i', curtain);
+    gsap.timeline({ scrollTrigger: { trigger: curtain.parentElement, start: 'top 82%', once: true } })
+      .to(halves[0], { xPercent: -102, duration: .8, ease: 'power4.inOut' }, 0)
+      .to(halves[1], { xPercent: 102, duration: .8, ease: 'power4.inOut' }, 0)
+      .to(curtain, { autoAlpha: 0, duration: .12 }, '-=.05');
+  });
+
+  // Draw the fine chapter rules beneath original headings.
+  qsa('.chapter-head, .infrastructure-head, .dev-heading, .section-heading').forEach(head => {
+    gsap.to(head, {
+      '--pd-rule': 1,
+      scrollTrigger: { trigger: head, start: 'top 82%', once: true }
+    });
+    const pseudoProxy = { value: 0 };
+    gsap.to(pseudoProxy, {
+      value: 1,
+      duration: 1.05,
+      ease: 'power3.out',
+      onUpdate: () => head.style.setProperty('--chapter-line-scale', pseudoProxy.value),
+      scrollTrigger: { trigger: head, start: 'top 82%', once: true }
+    });
+  });
+
+  // Image cards reveal through a mask, while keeping their existing positions.
+  qsa('.infra-card').forEach((card, i) => {
+    gsap.fromTo(card, { clipPath: i % 2 ? 'inset(0 0 100% 0 round 24px)' : 'inset(0 100% 0 0 round 24px)' }, {
+      clipPath: 'inset(0 0% 0% 0 round 24px)',
+      duration: 1.05,
+      ease: 'power4.out',
+      scrollTrigger: { trigger: card, start: 'top 88%', once: true }
+    });
+  });
+
+  // Gentle 3D lift only on cards; copy and layout stay untouched.
+  if (finePointer) {
+    qsa('.service-grid article, .solution-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const rx = ((e.clientY - r.top) / r.height - .5) * -4;
+        const ry = ((e.clientX - r.left) / r.width - .5) * 5;
+        gsap.to(card, { rotateX: rx, rotateY: ry, y: -4, duration: .25, transformPerspective: 900, ease: 'power2.out' });
+      });
+      card.addEventListener('mouseleave', () => gsap.to(card, { rotateX: 0, rotateY: 0, y: 0, duration: .45, ease: 'power3.out' }));
+    });
+  }
 
   gsap.to('.scroll-progress i', {
     scaleX: 1,
@@ -219,6 +330,15 @@
       if (dot) gsap.to(dot, { opacity: inside ? 0 : 1, duration: .12 });
     }, { passive: true });
   }
+
+
+
+  const refreshScrollLayout = () => window.ScrollTrigger && ScrollTrigger.refresh();
+  if (document.fonts?.ready) document.fonts.ready.then(() => setTimeout(refreshScrollLayout, 60));
+  window.addEventListener('load', () => setTimeout(refreshScrollLayout, 120), { once: true });
+  qsa('img').forEach(img => {
+    if (!img.complete) img.addEventListener('load', refreshScrollLayout, { once: true });
+  });
 
   window.addEventListener('resize', () => ScrollTrigger.refresh(), { passive: true });
 })();

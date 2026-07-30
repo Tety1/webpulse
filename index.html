@@ -2,153 +2,35 @@
 <html lang="es-AR">
 <head>
   <meta charset="UTF-8">
-
-  <!-- =========================================================
-       CONFIGURACIÓN BÁSICA
-  ========================================================== -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Servicio Técnico PC y Software en Rosario | PulseDesk</title>
-
-  <meta
-    name="description"
-    content="PulseDesk: reparación y mantenimiento de PC, soporte IT a domicilio y para empresas, redes, cámaras y desarrollo de software a medida en Rosario."
-  >
-
-  <meta
-    name="robots"
-    content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
-  >
-
+  <meta name="description" content="PulseDesk: reparación y mantenimiento de PC, soporte IT a domicilio y para empresas, redes, cámaras y desarrollo de software a medida en Rosario.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="author" content="PulseDesk">
   <meta name="theme-color" content="#071019">
-
-
-  <!-- =========================================================
-       SEO / CANONICAL
-  ========================================================== -->
   <link rel="canonical" href="__BASE_URL__/">
-
-
-  <!-- =========================================================
-       FAVICON PULSEDESK
-       
-       IMPORTANTE:
-       El archivo tiene que existir exactamente en:
-       /assets/icons/favicon.svg
-  ========================================================== -->
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    sizes="any"
-    href="/assets/icons/favicon.svg?v=3"
-  >
-
-  <link
-    rel="shortcut icon"
-    type="image/svg+xml"
-    href="/assets/icons/favicon.svg?v=3"
-  >
-
-
-  <!-- =========================================================
-       WEB APP MANIFEST
-  ========================================================== -->
-  <link rel="manifest" href="/site.webmanifest">
-
-
-  <!-- =========================================================
-       FUENTES
-  ========================================================== -->
+  <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="./site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="./assets/img/hardware-technician-1600.webp" fetchpriority="high">
+  <link rel="stylesheet" href="./styles.css?v=9">
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap"
-    rel="stylesheet"
-  >
-
-
-  <!-- =========================================================
-       PRELOAD HERO
-  ========================================================== -->
-  <link
-    rel="preload"
-    as="image"
-    href="/assets/img/hardware-technician-1600.webp"
-    fetchpriority="high"
-  >
-
-
-  <!-- =========================================================
-       CSS PRINCIPAL
-  ========================================================== -->
-  <link rel="stylesheet" href="/styles.css">
-
-
-  <!-- =========================================================
-       OPEN GRAPH / WHATSAPP / FACEBOOK / LINKEDIN
-  ========================================================== -->
   <meta property="og:locale" content="es_AR">
   <meta property="og:type" content="website">
-
-  <meta
-    property="og:title"
-    content="PulseDesk | Servicio Técnico PC y Soluciones Tecnológicas en Rosario"
-  >
-
-  <meta
-    property="og:description"
-    content="Servicio técnico, hardware, software, soporte a empresas y desarrollo de sistemas a medida. Tecnología resuelta de punta a punta."
-  >
-
+  <meta property="og:title" content="PulseDesk | Servicio Técnico PC y Soluciones Tecnológicas en Rosario">
+  <meta property="og:description" content="Servicio técnico, hardware, software, soporte a empresas y desarrollo de sistemas a medida. Tecnología resuelta de punta a punta.">
   <meta property="og:url" content="__BASE_URL__/">
   <meta property="og:site_name" content="PulseDesk">
-
-  <meta
-    property="og:image"
-    content="__BASE_URL__/assets/img/og-cover.jpg"
-  >
-
-  <meta
-    property="og:image:secure_url"
-    content="__BASE_URL__/assets/img/og-cover.jpg"
-  >
-
-  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image" content="__BASE_URL__/assets/img/og-cover.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-
-  <meta
-    property="og:image:alt"
-    content="PulseDesk - Servicio técnico, infraestructura y desarrollo de software"
-  >
-
-
-  <!-- =========================================================
-       TWITTER / X
-  ========================================================== -->
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PulseDesk | Tecnología que resuelve">
+  <meta name="twitter:description" content="Servicio técnico PC, soporte IT, infraestructura y software a medida en Rosario.">
+  <meta name="twitter:image" content="__BASE_URL__/assets/img/og-cover.jpg">
 
-  <meta
-    name="twitter:title"
-    content="PulseDesk | Tecnología que resuelve"
-  >
-
-  <meta
-    name="twitter:description"
-    content="Servicio técnico PC, soporte IT, infraestructura y software a medida en Rosario."
-  >
-
-  <meta
-    name="twitter:image"
-    content="__BASE_URL__/assets/img/og-cover.jpg"
-  >
-
-
-  <!-- =========================================================
-       DATOS ESTRUCTURADOS / SCHEMA.ORG
-  ========================================================== -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -160,10 +42,7 @@
         "url": "__BASE_URL__/",
         "logo": "__BASE_URL__/assets/icons/favicon.svg",
         "telephone": "+543416018944",
-        "areaServed": {
-          "@type": "City",
-          "name": "Rosario, Santa Fe, Argentina"
-        },
+        "areaServed": {"@type":"City","name":"Rosario, Santa Fe, Argentina"},
         "description": "Servicio técnico de computadoras, soporte informático para empresas, infraestructura IT, redes, cámaras, desarrollo de software a medida, automatizaciones, chatbots e inteligencia artificial."
       },
       {
@@ -171,48 +50,26 @@
         "@id": "__BASE_URL__/#website",
         "url": "__BASE_URL__/",
         "name": "PulseDesk",
-        "publisher": {
-          "@id": "__BASE_URL__/#organization"
-        },
+        "publisher": {"@id": "__BASE_URL__/#organization"},
         "inLanguage": "es-AR"
       },
       {
         "@type": "Service",
         "name": "Servicio técnico de PC en Rosario",
-        "provider": {
-          "@id": "__BASE_URL__/#organization"
-        },
+        "provider": {"@id": "__BASE_URL__/#organization"},
         "areaServed": "Rosario, Santa Fe",
-        "serviceType": [
-          "Reparación de computadoras",
-          "Mantenimiento de PC",
-          "Instalación de SSD y RAM",
-          "Soporte de Windows y drivers",
-          "Soporte a domicilio"
-        ]
+        "serviceType": ["Reparación de computadoras", "Mantenimiento de PC", "Instalación de SSD y RAM", "Soporte de Windows y drivers", "Soporte a domicilio"]
       },
       {
         "@type": "Service",
         "name": "Desarrollo de software a medida",
-        "provider": {
-          "@id": "__BASE_URL__/#organization"
-        },
+        "provider": {"@id": "__BASE_URL__/#organization"},
         "areaServed": "Argentina",
-        "serviceType": [
-          "ERP",
-          "Sistemas de gestión",
-          "Facturación y stock",
-          "Automatizaciones",
-          "Chatbots",
-          "IA para empresas",
-          "Integraciones",
-          "Pantallas y tótems"
-        ]
+        "serviceType": ["ERP", "Sistemas de gestión", "Facturación y stock", "Automatizaciones", "Chatbots", "IA para empresas", "Integraciones", "Pantallas y tótems"]
       }
     ]
   }
   </script>
-
 </head>
 <body>
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -295,7 +152,26 @@
       </div>
     </section>
 
-    <section class="tech-service hardware-zone" id="servicio-tecnico">
+
+    <section class="cinematic-divider cinematic-divider-hardware" aria-label="Capítulo Hardware y soporte técnico">
+      <div class="cinematic-divider-sticky">
+        <figure class="cinematic-divider-media"><picture><source media="(max-width:900px)" srcset="./assets/img/hardware-technician-900.webp"><img src="./assets/img/hardware-technician-1600.webp" alt="Técnico realizando diagnóstico y mantenimiento de una computadora" loading="lazy"></picture></figure>
+        <div class="cinematic-divider-shade"></div>
+        <div class="cinematic-divider-grid" aria-hidden="true"></div>
+        <div class="cinematic-divider-panels" aria-hidden="true"><i></i><i></i></div>
+        <div class="shell cinematic-divider-copy">
+          <span class="cinematic-divider-index">01 / 03</span>
+          <p>HARDWARE + SOPORTE TÉCNICO</p>
+          <h2>Diagnóstico.<br><span>Mantenimiento.</span><br>Rendimiento.</h2>
+          <small>Equipos listos para trabajar.</small>
+        </div>
+        <div class="cinematic-divider-line" aria-hidden="true"></div>
+        <div class="cinematic-divider-marquee" aria-hidden="true"><span>DIAGNÓSTICO · MANTENIMIENTO · SSD · RAM · WINDOWS · DRIVERS · OFFICE · SOPORTE ·</span><span>DIAGNÓSTICO · MANTENIMIENTO · SSD · RAM · WINDOWS · DRIVERS · OFFICE · SOPORTE ·</span></div>
+      </div>
+    </section>
+
+    <section class="tech-service hardware-zone chapter-content chapter-hardware" id="servicio-tecnico">
+      <div class="section-curtain" aria-hidden="true"><i></i><i></i></div>
       <div class="chapter-head shell">
         <div><p class="eyebrow">02 / SERVICIO TÉCNICO PC</p><h2>Primero entendemos<br><span>qué está fallando.</span></h2></div>
         <p>Servicio técnico de computadoras en Rosario para hogares, profesionales y empresas. Diagnóstico, reparación, mantenimiento y upgrades de hardware con procesos claros.</p>
@@ -307,6 +183,8 @@
           <figure class="scene-image" data-scene-image="1"><picture><source media="(max-width:900px)" srcset="./assets/img/cpu-install-900.webp"><img src="./assets/img/cpu-install-1600.webp" alt="Instalación y revisión de procesador sobre motherboard" loading="lazy"></picture></figure>
           <figure class="scene-image" data-scene-image="2"><picture><source media="(max-width:900px)" srcset="./assets/img/pc-maintenance-900.webp"><img src="./assets/img/pc-maintenance-1600.webp" alt="Computadora de escritorio abierta para mantenimiento y limpieza" loading="lazy"></picture></figure>
           <figure class="scene-image" data-scene-image="3"><picture><source media="(max-width:900px)" srcset="./assets/img/motherboard-pro-900.webp"><img src="./assets/img/motherboard-pro-1600.webp" alt="Detalle profesional de motherboard, CPU y bancos de memoria" loading="lazy"></picture></figure>
+          <div class="scene-wipe scene-wipe-hardware" aria-hidden="true"></div>
+          <div class="scene-scan scene-scan-hardware" aria-hidden="true"></div>
           <div class="visual-overlay"></div>
           <div class="diagnostic-strip"><div><small>MEM</small><b>PASS</b><span>0 ERR</span></div><div><small>NVMe</small><b>98%</b><span>SMART</span></div><div><small>CPU</small><b>64°</b><span>LOAD</span></div></div>
           <div class="visual-counter"><b>01</b><span>/04</span></div>
@@ -347,7 +225,7 @@
       </div>
     </section>
 
-    <section class="pc-software section-light" id="software-pc">
+    <section class="pc-software section-light chapter-content chapter-hardware" id="software-pc">
       <div class="shell software-layout">
         <div class="software-copy">
           <p class="eyebrow reveal">03 / SOFTWARE PARA TU PC</p>
@@ -377,7 +255,26 @@
       </div>
     </section>
 
-    <section class="infrastructure" id="infraestructura">
+
+    <section class="cinematic-divider cinematic-divider-security" aria-label="Capítulo Infraestructura y cámaras">
+      <div class="cinematic-divider-sticky">
+        <figure class="cinematic-divider-media"><picture><source media="(max-width:900px)" srcset="./assets/img/cctv-900.webp"><img src="./assets/img/cctv-1600.webp" alt="Sistema profesional de cámaras de seguridad y videovigilancia" loading="lazy"></picture></figure>
+        <div class="cinematic-divider-shade"></div>
+        <div class="cinematic-divider-grid" aria-hidden="true"></div>
+        <div class="cinematic-divider-panels" aria-hidden="true"><i></i><i></i></div>
+        <div class="shell cinematic-divider-copy">
+          <span class="cinematic-divider-index">02 / 03</span>
+          <p>INFRAESTRUCTURA + SEGURIDAD</p>
+          <h2>Conectar.<br><span>Monitorear.</span><br>Proteger.</h2>
+          <small>Control real sobre cada espacio.</small>
+        </div>
+        <div class="cinematic-divider-line" aria-hidden="true"></div>
+        <div class="cinematic-divider-marquee" aria-hidden="true"><span>REDES · WI-FI · CCTV · CÁMARAS IP · ACCESO REMOTO · GRABACIÓN · SOPORTE ·</span><span>REDES · WI-FI · CCTV · CÁMARAS IP · ACCESO REMOTO · GRABACIÓN · SOPORTE ·</span></div>
+      </div>
+    </section>
+
+    <section class="infrastructure chapter-content chapter-security" id="infraestructura">
+      <div class="section-curtain" aria-hidden="true"><i></i><i></i></div>
       <div class="shell infrastructure-head">
         <p class="eyebrow">04 / SOPORTE IT PARA EMPRESAS</p>
         <h2>Cuando hay diez equipos, una red y una operación,<br><span>ya no alcanza con “arreglar una PC”.</span></h2>
@@ -402,7 +299,25 @@
       </div>
     </section>
 
-    <section class="bridge-section">
+
+    <section class="cinematic-divider cinematic-divider-software" aria-label="Capítulo Software y automatización">
+      <div class="cinematic-divider-sticky">
+        <figure class="cinematic-divider-media"><picture><source media="(max-width:900px)" srcset="./assets/img/dev-workspace-900.webp"><img src="./assets/img/dev-workspace-1600.webp" alt="Desarrollo de software, automatización y sistemas empresariales" loading="lazy"></picture></figure>
+        <div class="cinematic-divider-shade"></div>
+        <div class="cinematic-divider-grid" aria-hidden="true"></div>
+        <div class="cinematic-divider-panels" aria-hidden="true"><i></i><i></i></div>
+        <div class="shell cinematic-divider-copy">
+          <span class="cinematic-divider-index">03 / 03</span>
+          <p>SOFTWARE + AUTOMATIZACIÓN</p>
+          <h2>Diseñar.<br><span>Integrar.</span><br>Automatizar.</h2>
+          <small>Sistemas que trabajan con tu empresa.</small>
+        </div>
+        <div class="cinematic-divider-line" aria-hidden="true"></div>
+        <div class="cinematic-divider-marquee" aria-hidden="true"><span>ERP · POS · STOCK · LOGÍSTICA · CHATBOTS · IA · AUTOMATIZACIÓN · INTEGRACIONES ·</span><span>ERP · POS · STOCK · LOGÍSTICA · CHATBOTS · IA · AUTOMATIZACIÓN · INTEGRACIONES ·</span></div>
+      </div>
+    </section>
+
+    <section class="bridge-section chapter-content chapter-software">
       <div class="bridge-photo" aria-hidden="true"><picture><source media="(max-width:900px)" srcset="./assets/img/dev-team-900.webp"><img src="./assets/img/dev-team-1600.webp" alt="" loading="lazy"></picture></div>
       <div class="bridge-shade"></div>
       <div class="shell bridge-copy">
@@ -412,7 +327,8 @@
       </div>
     </section>
 
-    <section class="development" id="desarrollo">
+    <section class="development chapter-content chapter-software" id="desarrollo">
+      <div class="section-curtain" aria-hidden="true"><i></i><i></i></div>
       <div class="chapter-head shell dev-heading">
         <div><p class="eyebrow">06 / DESARROLLO DE SOFTWARE</p><h2>Software diseñado alrededor<br><span>de cómo trabaja tu empresa.</span></h2></div>
         <p>No vendemos una plantilla y tratamos de forzar tu operación. Entendemos el proceso, diseñamos la solución y conectamos las piezas.</p>
@@ -424,6 +340,8 @@
           <figure class="dev-scene" data-dev-image="1"><picture><source media="(max-width:900px)" srcset="./assets/img/dev-team-900.webp"><img src="./assets/img/dev-team-1600.webp" alt="Programadores trabajando en equipo sobre un sistema" loading="lazy"></picture></figure>
           <figure class="dev-scene" data-dev-image="2"><picture><source media="(max-width:900px)" srcset="./assets/img/code-closeup-900.webp"><img src="./assets/img/code-closeup-1600.webp" alt="Código fuente de una aplicación desarrollada a medida" loading="lazy"></picture></figure>
           <figure class="dev-scene" data-dev-image="3"><picture><source media="(max-width:900px)" srcset="./assets/img/totem-kiosk-900.webp"><img src="./assets/img/totem-kiosk-1600.webp" alt="Tótem digital interactivo con pantalla táctil" loading="lazy"></picture></figure>
+          <div class="scene-wipe scene-wipe-development" aria-hidden="true"></div>
+          <div class="scene-scan scene-scan-development" aria-hidden="true"></div>
           <div class="dev-overlay"></div>
           <div class="floating-code"><small>orders.service</small><code>POST /api/orders<br><span>201 CREATED</span></code></div>
           <div class="floating-metric"><small>OPERACIÓN</small><b>CONNECTED</b><span>ventas · stock · logística</span></div>
@@ -439,7 +357,7 @@
       </div>
     </section>
 
-    <section class="solutions section-light">
+    <section class="solutions section-light chapter-content chapter-software">
       <div class="shell">
         <div class="section-heading">
           <div><p class="eyebrow">LO QUE SABEMOS CONSTRUIR</p><h2>De una idea a un sistema<br><span>que realmente se usa.</span></h2></div>
@@ -458,7 +376,7 @@
       </div>
     </section>
 
-    <section class="connected-operation">
+    <section class="connected-operation chapter-content chapter-software">
       <div class="shell connected-layout">
         <div class="connected-copy">
           <p class="eyebrow">UN EJEMPLO SIMPLE</p>
@@ -523,6 +441,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
-  <script src="./app.js" defer></script>
+  <script src="./app.js?v=9" defer></script>
 </body>
 </html>
