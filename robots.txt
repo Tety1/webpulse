@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: __BASE_URL__/sitemap.xml
+Sitemap: https://www.pulsedesk.com.ar/sitemap.xml
