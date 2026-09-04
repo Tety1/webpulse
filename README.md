@@ -1,12 +1,12 @@
-# PULSEDESK DIST – GitHub Pages
+# PULSEDESK DIST - descarga directa
 
-Versión autocontenida para producción.
+El boton del hero apunta a:
 
-## Publicación
-1. Subí `index.html` y `.nojekyll` a la raíz del repositorio.
-2. GitHub → Settings → Pages.
-3. Deploy from a branch → `main` → `/ (root)`.
-4. Guardá y esperá el deploy.
+`./downloads/PULSEDESK-DIST-Setup.exe`
 
-No necesita `styles.css`, `script.js` ni carpeta `assets`: todo está incorporado dentro de `index.html`.
-El WhatsApp comercial configurado es +54 341 901 8944.
+Para publicar:
+1. Subir `index.html` y `.nojekyll` a la raiz del repo.
+2. Crear/subir la carpeta `downloads`.
+3. Dentro de `downloads`, subir el instalador con nombre exacto `PULSEDESK-DIST-Setup.exe`.
+
+Al hacer clic, el navegador descarga el archivo desde GitHub Pages, sin pasar por Google Drive.
