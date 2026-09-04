@@ -1,25 +1,310 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#07080d" />
-    <meta name="description" content="PulseDesk DIST: ventas, stock, caja, clientes, cuenta corriente, pedidos, reportes, alertas e impresión para kioscos, minimarkets, 24 hs y distribuidoras." />
-    <meta name="robots" content="index, follow" />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="es_AR" />
-    <meta property="og:title" content="PulseDesk DIST | Tu negocio bajo control" />
-    <meta property="og:description" content="Gestioná ventas, stock, caja, clientes, pedidos y reportes desde PC o celular. Desde $50.000 mensuales." />
-    <meta property="og:url" content="https://www.pulsedesk.com.ar/" />
-    <meta property="og:image" content="https://www.pulsedesk.com.ar/og.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="canonical" href="https://www.pulsedesk.com.ar/" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>PulseDesk DIST | Sistema para comercios y distribuidoras</title>
-    <script type="module" crossorigin src="/assets/index-C_YEe122.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BatYoARC.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090614" />
+  <meta name="description" content="PULSEDESK DIST centraliza ventas, stock, clientes, caja, pedidos, reportes y operación diaria de tu comercio en un solo lugar." />
+  <title>PULSEDESK DIST | Gestión inteligente para comercios</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+
+  <header class="site-header" id="inicio">
+    <div class="container nav-wrap">
+      <a class="brand" href="#inicio" aria-label="PULSEDESK DIST - Inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64" role="img">
+            <defs>
+              <linearGradient id="brandGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#b7ff17"/>
+                <stop offset="0.52" stop-color="#8e34ff"/>
+                <stop offset="1" stop-color="#caff2a"/>
+              </linearGradient>
+            </defs>
+            <path d="M13 18h25c9 0 14 5 14 12 0 9-7 13-16 13H24v8H13V33h23c3 0 5-1 5-4s-2-4-5-4H13z" fill="url(#brandGradient)"/>
+            <path d="M18 13h29v8H18z" fill="#fff" opacity=".9"/>
+          </svg>
+        </span>
+        <span class="brand-text"><strong>PULSEDESK</strong><em>DIST.</em></span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="#modulos">Módulos</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#beneficios">Beneficios</a>
+        <a href="#rubros">Rubros</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <a class="btn btn-primary nav-cta" href="#contacto">Solicitar demo</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero section">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow"><span></span> SOFTWARE DE GESTIÓN PARA COMERCIOS</div>
+          <h1>Todo tu comercio, <span>en un solo lugar.</span></h1>
+          <p class="hero-lead">Ventas, stock, clientes, caja, pedidos, cuenta corriente, reportes y gestión diaria conectados en una experiencia simple, rápida y profesional.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="#contacto">Solicitar demo</a>
+            <a class="btn btn-secondary btn-lg" href="#experiencia">Ver cómo funciona</a>
+          </div>
+          <div class="hero-proof">
+            <div><b>01</b><span>Información centralizada</span></div>
+            <div><b>02</b><span>Control en tiempo real</span></div>
+            <div><b>03</b><span>Acceso desde cualquier dispositivo</span></div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal reveal-delay-1" aria-label="Vista previa del sistema PULSEDESK DIST">
+          <div class="screen-shell tilt-card">
+            <div class="screen-topbar">
+              <div class="screen-dots"><i></i><i></i><i></i></div>
+              <div class="screen-search">Buscar en PULSEDESK DIST</div>
+              <div class="screen-user">EC</div>
+            </div>
+            <div class="screen-layout">
+              <aside class="screen-sidebar">
+                <div class="mini-brand">PD</div>
+                <button class="active">⌂ <span>Dashboard</span></button>
+                <button>◈ <span>Ventas</span></button>
+                <button>□ <span>Productos</span></button>
+                <button>◎ <span>Clientes</span></button>
+                <button>↔ <span>Caja</span></button>
+                <button>▤ <span>Pedidos</span></button>
+                <button>⌁ <span>Reportes</span></button>
+              </aside>
+              <div class="dashboard">
+                <div class="dash-head">
+                  <div><small>Viernes, 4 de septiembre</small><h3>Resumen del comercio</h3></div>
+                  <span class="live"><i></i> En vivo</span>
+                </div>
+                <div class="kpi-row">
+                  <article><small>Ventas del día</small><strong>$ 2.450.000</strong><span>+12,6%</span></article>
+                  <article><small>Pedidos</small><strong>128</strong><span>+8,3%</span></article>
+                  <article><small>Clientes activos</small><strong>356</strong><span>+5,4%</span></article>
+                </div>
+                <div class="dashboard-grid">
+                  <article class="chart-card">
+                    <div class="card-heading"><span>Ventas últimos 7 días</span><small>$ 12,8M</small></div>
+                    <svg class="chart" viewBox="0 0 520 210" preserveAspectRatio="none" aria-hidden="true">
+                      <defs>
+                        <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0" stop-color="#9f44ff" stop-opacity=".55"/>
+                          <stop offset="1" stop-color="#9f44ff" stop-opacity="0"/>
+                        </linearGradient>
+                      </defs>
+                      <path d="M0 180 C50 170,72 122,120 136 S190 74,240 102 S305 58,355 76 S435 34,520 46 L520 210 L0 210Z" fill="url(#area)"/>
+                      <path d="M0 180 C50 170,72 122,120 136 S190 74,240 102 S305 58,355 76 S435 34,520 46" fill="none" stroke="#a84dff" stroke-width="6" stroke-linecap="round"/>
+                    </svg>
+                  </article>
+                  <article class="orders-card">
+                    <div class="card-heading"><span>Pedidos</span><small>Hoy</small></div>
+                    <div class="order-line"><i class="pending"></i><div><b>#1842</b><small>Almacén Central</small></div><strong>$125.600</strong></div>
+                    <div class="order-line"><i class="route"></i><div><b>#1841</b><small>Market Norte</small></div><strong>$89.300</strong></div>
+                    <div class="order-line"><i class="done"></i><div><b>#1840</b><small>Comercio Sur</small></div><strong>$64.900</strong></div>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="floating-badge badge-stock"><span>Stock crítico</span><strong>8 productos</strong></div>
+          <div class="floating-badge badge-sales"><span>Ventas</span><strong>+18,4%</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="logo-strip" aria-label="Áreas que podés gestionar">
+      <div class="container marquee-wrap">
+        <div class="marquee">
+          <span>VENTAS</span><i></i><span>STOCK</span><i></i><span>CLIENTES</span><i></i><span>CAJA</span><i></i><span>PEDIDOS</span><i></i><span>REPORTES</span><i></i><span>REPARTO</span><i></i><span>CUENTA CORRIENTE</span>
+          <span>VENTAS</span><i></i><span>STOCK</span><i></i><span>CLIENTES</span><i></i><span>CAJA</span><i></i><span>PEDIDOS</span><i></i><span>REPORTES</span><i></i><span>REPARTO</span><i></i><span>CUENTA CORRIENTE</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section modules" id="modulos">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow"><span></span> TODO LO QUE NECESITÁS PARA OPERAR MEJOR</div>
+          <h2>Un sistema completo.<br><span>Sin vueltas.</span></h2>
+          <p>El núcleo de tu operación organizado en módulos claros, conectados y pensados para trabajar rápido.</p>
+        </div>
+
+        <div class="module-grid">
+          <article class="module-card reveal"><div class="icon">↗</div><h3>Ventas</h3><p>Registrá ventas, medios de pago, descuentos, recargos y comprobantes desde una interfaz ágil.</p><span>Operación diaria</span></article>
+          <article class="module-card reveal"><div class="icon">◇</div><h3>Productos</h3><p>Administrá catálogo, stock, costos, precios, códigos, unidades y alertas en un mismo lugar.</p><span>Inventario</span></article>
+          <article class="module-card reveal"><div class="icon">◎</div><h3>Clientes</h3><p>Centralizá datos, historial, listas de precios, saldos y condiciones comerciales por cliente.</p><span>CRM comercial</span></article>
+          <article class="module-card reveal"><div class="icon">$</div><h3>Cuenta corriente</h3><p>Controlá deudas, pagos parciales, comprobantes y saldos para tener siempre una visión clara.</p><span>Cobranzas</span></article>
+          <article class="module-card reveal"><div class="icon">▣</div><h3>Caja</h3><p>Aperturas, cierres, ingresos, retiros, movimientos y control real de cada caja de tu comercio.</p><span>Tesorería</span></article>
+          <article class="module-card reveal"><div class="icon">▤</div><h3>Pedidos</h3><p>Creá, prepará, despachá y seguí pedidos sin perder información entre distintas áreas.</p><span>Operaciones</span></article>
+          <article class="module-card reveal"><div class="icon">⌁</div><h3>Hoja de ruta</h3><p>Ordená recorridos, entregas y estados para hacer más eficiente la logística de cada día.</p><span>Logística</span></article>
+          <article class="module-card reveal"><div class="icon">◉</div><h3>Choferes</h3><p>Asigná entregas, seguí el estado de cada pedido y mantené trazabilidad sobre cada recorrido.</p><span>Distribución</span></article>
+          <article class="module-card reveal"><div class="icon">▥</div><h3>Reportes</h3><p>Visualizá ventas, productos, márgenes, stock y comportamiento del negocio para decidir mejor.</p><span>Inteligencia</span></article>
+          <article class="module-card reveal"><div class="icon">%</div><h3>Listas de precios</h3><p>Creá listas con recargos o descuentos y asignalas según cliente, canal o estrategia comercial.</p><span>Precios</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section experience" id="experiencia">
+      <div class="container experience-grid">
+        <div class="experience-copy reveal">
+          <div class="eyebrow"><span></span> DISEÑADO PARA USARSE, NO PARA SUFRIRSE</div>
+          <h2>Información clara.<br><span>Acciones rápidas.</span></h2>
+          <p>PULSEDESK DIST pone lo importante primero: menos pasos, menos pantallas innecesarias y más contexto para resolver cada tarea.</p>
+          <div class="check-list">
+            <div><b>✓</b><span>Responsive para PC, tablet y celular.</span></div>
+            <div><b>✓</b><span>Interfaz consistente en todos los módulos.</span></div>
+            <div><b>✓</b><span>Permisos y accesos según cada usuario.</span></div>
+            <div><b>✓</b><span>Información separada y protegida por empresa.</span></div>
+          </div>
+        </div>
+
+        <div class="experience-stack reveal reveal-delay-1">
+          <div class="panel panel-orders">
+            <div class="panel-head"><span>Pedidos</span><button>Nuevo pedido</button></div>
+            <div class="tabs"><b>Pendientes</b><span>Preparación</span><span>En reparto</span><span>Entregados</span></div>
+            <div class="table-head"><span>Pedido</span><span>Cliente</span><span>Total</span><span>Estado</span></div>
+            <div class="table-row"><span>#01842</span><b>Super Centro</b><span>$125.600</span><em class="tag yellow">Pendiente</em></div>
+            <div class="table-row"><span>#01841</span><b>Market Norte</b><span>$89.300</span><em class="tag violet">Preparando</em></div>
+            <div class="table-row"><span>#01840</span><b>Comercio Sur</b><span>$64.900</span><em class="tag green">Entregado</em></div>
+            <div class="table-row"><span>#01839</span><b>Almacén 24</b><span>$152.800</span><em class="tag blue">En reparto</em></div>
+          </div>
+          <div class="panel panel-mobile">
+            <div class="mobile-top"><span>09:41</span><b>Hoja de ruta</b><i>•••</i></div>
+            <div class="route-map">
+              <span class="route-line"></span>
+              <i class="pin p1">1</i><i class="pin p2">2</i><i class="pin p3">3</i><i class="pin p4">4</i>
+            </div>
+            <div class="route-list">
+              <div><b>01</b><span><strong>Super Centro</strong><small>09:00 · Centro</small></span></div>
+              <div><b>02</b><span><strong>Market Norte</strong><small>10:30 · Norte</small></span></div>
+              <div><b>03</b><span><strong>Comercio Sur</strong><small>11:15 · Sur</small></span></div>
+            </div>
+          </div>
+          <div class="panel panel-product">
+            <small>Producto</small><h4>Coca Cola 2.25L</h4><div class="product-line"><span>Stock</span><b>320 u.</b></div><div class="product-line"><span>Precio</span><b>$ 1.250</b></div><div class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section benefits" id="beneficios">
+      <div class="container">
+        <div class="section-heading centered reveal">
+          <div class="eyebrow"><span></span> RESULTADOS QUE SE NOTAN</div>
+          <h2>Más control. Más tiempo.<br><span>Mejores decisiones.</span></h2>
+        </div>
+        <div class="benefit-grid">
+          <article class="benefit reveal"><div>01</div><h3>Control total</h3><p>Sabé qué pasa en tu comercio sin depender de planillas, mensajes o información dispersa.</p></article>
+          <article class="benefit reveal"><div>02</div><h3>Menos trabajo manual</h3><p>Unificá procesos repetitivos y reducí errores al mover información entre áreas.</p></article>
+          <article class="benefit reveal"><div>03</div><h3>Mejor seguimiento</h3><p>Historial de clientes, pedidos, movimientos y estados para trabajar con contexto real.</p></article>
+          <article class="benefit reveal"><div>04</div><h3>Decisiones con datos</h3><p>Reportes y KPIs para detectar tendencias, oportunidades y problemas antes.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section commerce-types" id="rubros">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow"><span></span> FLEXIBLE POR DISEÑO</div>
+          <h2>Un sistema para<br><span>distintos tipos de comercio.</span></h2>
+          <p>La misma base sólida, adaptada a la operación real de cada negocio.</p>
+        </div>
+        <div class="types-grid">
+          <article class="type-card reveal"><span>01</span><div class="type-art art-store"></div><h3>Minimarkets</h3><p>Ventas, productos, caja, clientes, stock y control diario.</p></article>
+          <article class="type-card reveal"><span>02</span><div class="type-art art-box"></div><h3>Distribuidoras</h3><p>Pedidos, cuenta corriente, listas de precios, reparto y reportes.</p></article>
+          <article class="type-card reveal"><span>03</span><div class="type-art art-tools"></div><h3>Ferreterías</h3><p>Catálogo amplio, precios, clientes, ventas y seguimiento de stock.</p></article>
+          <article class="type-card reveal"><span>04</span><div class="type-art art-cart"></div><h3>Mayoristas</h3><p>Operación con volumen, múltiples precios y control comercial.</p></article>
+          <article class="type-card reveal"><span>05</span><div class="type-art art-shop"></div><h3>Comercios</h3><p>Una plataforma flexible para profesionalizar la gestión sin complicarla.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section comparison">
+      <div class="container comparison-grid">
+        <div class="comparison-copy reveal">
+          <div class="eyebrow"><span></span> DEJÁ ATRÁS LA GESTIÓN FRAGMENTADA</div>
+          <h2>Todo conectado.<br><span>Todo más simple.</span></h2>
+          <p>Cuando cada área usa una herramienta distinta, aparecen errores, retrabajo y poca visibilidad. PULSEDESK DIST conecta la operación para que todos trabajen sobre la misma información.</p>
+          <a href="#contacto" class="text-link">Quiero ver una demo <span>→</span></a>
+        </div>
+        <div class="comparison-card reveal reveal-delay-1">
+          <div class="before"><small>ANTES</small><div><i>XL</i><span>Planillas</span></div><div><i>WA</i><span>Mensajes</span></div><div><i>PDF</i><span>Archivos sueltos</span></div><div><i>?</i><span>Datos incompletos</span></div></div>
+          <div class="flow-arrow">→</div>
+          <div class="after"><small>CON PULSEDESK</small><div class="pulse-orb">PD</div><strong>Una sola operación</strong><span>Ventas · Stock · Clientes · Caja · Pedidos · Reportes</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq" id="faq">
+      <div class="container faq-grid">
+        <div class="faq-intro reveal">
+          <div class="eyebrow"><span></span> PREGUNTAS FRECUENTES</div>
+          <h2>Lo importante,<br><span>bien claro.</span></h2>
+          <p>Una base para que el cliente entienda rápido cómo encaja PULSEDESK DIST en su negocio.</p>
+        </div>
+        <div class="faq-list reveal reveal-delay-1">
+          <details open><summary>¿PULSEDESK DIST sirve solamente para distribuidoras?<span>+</span></summary><p>No. Está pensado como una plataforma de gestión para comercios. Se adapta a minimarkets, ferreterías, mayoristas, distribuidoras, kioscos y otros negocios que necesiten ordenar su operación.</p></details>
+          <details><summary>¿Puedo usarlo desde más de un dispositivo?<span>+</span></summary><p>Sí. La experiencia está preparada para trabajar desde PC, notebook, tablet o celular según el módulo y la necesidad del usuario.</p></details>
+          <details><summary>¿Cada usuario puede tener permisos diferentes?<span>+</span></summary><p>Sí. La plataforma contempla usuarios, roles y permisos para controlar qué puede ver o hacer cada persona dentro del sistema.</p></details>
+          <details><summary>¿Puedo manejar listas de precios diferentes?<span>+</span></summary><p>Sí. Podés crear listas con descuentos o recargos y asignarlas según cliente o estrategia comercial.</p></details>
+          <details><summary>¿Los datos de cada empresa están separados?<span>+</span></summary><p>Sí. La arquitectura del sistema trabaja con aislamiento por empresa para mantener separada la información operativa de cada organización.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section final-cta" id="contacto">
+      <div class="container">
+        <div class="cta-card reveal">
+          <div class="cta-orbit orbit-a"></div><div class="cta-orbit orbit-b"></div>
+          <div class="cta-copy">
+            <div class="eyebrow"><span></span> ¿QUERÉS VERLO FUNCIONANDO?</div>
+            <h2>Descubrí cómo PULSEDESK DIST puede ordenar y potenciar tu comercio.</h2>
+            <p>Coordiná una demo y recorré los módulos que más se adapten a tu operación.</p>
+          </div>
+          <form class="lead-form" id="leadForm">
+            <label><span>Nombre</span><input type="text" name="name" placeholder="Tu nombre" required /></label>
+            <label><span>Comercio</span><input type="text" name="business" placeholder="Nombre del comercio" required /></label>
+            <label><span>Teléfono / WhatsApp</span><input type="tel" name="phone" placeholder="341 000 0000" required /></label>
+            <button class="btn btn-primary btn-lg" type="submit">Quiero una demo</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand footer-brand"><span class="brand-mark"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M13 18h25c9 0 14 5 14 12 0 9-7 13-16 13H24v8H13V33h23c3 0 5-1 5-4s-2-4-5-4H13z" fill="#b7ff17"/><path d="M18 13h29v8H18z" fill="#fff" opacity=".9"/></svg></span><span class="brand-text"><strong>PULSEDESK</strong><em>DIST.</em></span></div>
+        <p>Gestión inteligente para comercios.</p>
+      </div>
+      <div><h4>Producto</h4><a href="#modulos">Módulos</a><a href="#experiencia">Experiencia</a><a href="#beneficios">Beneficios</a></div>
+      <div><h4>Soluciones</h4><a href="#rubros">Minimarkets</a><a href="#rubros">Distribuidoras</a><a href="#rubros">Ferreterías</a><a href="#rubros">Mayoristas</a></div>
+      <div><h4>Empresa</h4><a href="#contacto">Solicitar demo</a><a href="#faq">Preguntas frecuentes</a><a href="#inicio">Volver arriba</a></div>
+    </div>
+    <div class="container footer-bottom"><span>© <b id="year"></b> PULSEDESK. Todos los derechos reservados.</span><span>Diseñado para crecer.</span></div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/543419018944?text=Hola%2C%20quiero%20conocer%20PULSEDESK%20DIST%20y%20coordinar%20una%20demo%20para%20mi%20comercio." target="_blank" rel="noopener noreferrer" aria-label="Hablar con PULSEDESK por WhatsApp" title="Hablar por WhatsApp">
+    <img src="assets/whatsapp.png" alt="WhatsApp" />
+  </a>
+  <script src="script.js"></script>
+</body>
 </html>
