@@ -1,16 +1,17 @@
-# PULSEDESK DIST - Producción
+# PULSEDESK DIST — Web Producción
 
-## WhatsApp
-Configurado a: +54 341 601 8944
+Versión actualizada con:
+- Compras
+- Proveedores
+- Facturación electrónica conectada a ARCA
+- Listas de precios imprimibles
+- Comisiones de vendedores (fija, por categoría o por producto)
+- Presentación de SAN, soporte online de PULSEDESK
 
-## Descarga de Windows
-El botón apunta a:
-`./downloads/PULSEDESK-DIST-Setup.exe`
+Configuración vigente:
+- Descarga Windows: Cloudflare R2
+- WhatsApp: +54 341 601 8944
+- Web autocontenida en `index.html` (incluye la imagen de SAN)
 
-Antes de publicar, colocar el instalador real dentro de `downloads/` con el nombre exacto:
-`PULSEDESK-DIST-Setup.exe`
-
-Luego se podrá descargar desde:
-`https://pulsedesk.com.ar/downloads/PULSEDESK-DIST-Setup.exe`
-
-El archivo `SUBIR_EXE_AQUI.txt` es solo una guía y puede borrarse después de subir el ejecutable.
+## Publicar en GitHub Pages
+Reemplazar el `index.html` actual por este archivo y mantener `.nojekyll` en la raíz.
